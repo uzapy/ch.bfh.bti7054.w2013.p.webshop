@@ -23,22 +23,28 @@
 			require("PHP/basic.php");
 		</script>
 		
-		<title>Webshop</title>
+		<title>Plattelade</title>
 	</head>
 
 	<body>
 		<div>
-			<header>
-				<h1>start</h1>
-			</header>
 			<nav>
 				<p>
 					<a href="/">Home</a>
 				</p>
 				<p>
-					<a href="/contact">Contact</a>
+					<a href="/contact">Kontakt</a>
+				</p>
+				<p>
+					<a href="/store">Sortiment</a>
+				</p>
+				<p>
+					<a href="/news">News</a>
 				</p>
 			</nav>
+			<header>
+				<h1>Plattelade</h1>
+			</header>
 
 			<div>
 				<?php first_echo() ?>

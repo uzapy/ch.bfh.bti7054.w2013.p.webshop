@@ -1,3 +1,12 @@
+html {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+nav {
+	font-size: large;
+	color: #333333;
+}
+
 h1 {
 	font-size: 45px;
 }
