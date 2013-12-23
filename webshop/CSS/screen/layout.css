@@ -3,5 +3,22 @@ html{
 	padding: 0;
 }
 nav {
-	
+	position: fixed;
+	float: left;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.nav {
+	list-style: none outside none;
+}
+
+.nav > li {
+    float: left;
+}
+
+.nav > li > a {
+	padding: 10px 15px;
+	text-decoration: none;
+	display: block;
 }

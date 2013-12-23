@@ -29,18 +29,22 @@
 	<body>
 		<div>
 			<nav>
-				<p>
-					<a href="/">Home</a>
-				</p>
-				<p>
-					<a href="/contact">Kontakt</a>
-				</p>
-				<p>
-					<a href="/store">Sortiment</a>
-				</p>
-				<p>
-					<a href="/news">News</a>
-				</p>
+				<div>
+					<ul class="nav">
+						<li>
+							<a href="/">Home</a>
+						</li>
+						<li>
+							<a href="/contact">Kontakt</a>
+						</li>
+						<li>
+							<a href="/store">Sortiment</a>
+						</li>
+						<li>
+							<a href="/news">News</a>
+						</li>
+					</ul>
+				</div>
 			</nav>
 			<header>
 				<h1>Plattelade</h1>

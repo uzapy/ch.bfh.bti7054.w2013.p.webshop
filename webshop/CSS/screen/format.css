@@ -4,8 +4,16 @@ html {
 
 nav {
 	font-size: large;
-	color: #333333;
+	background-color: #1B1B1B;
+    background-image: linear-gradient(to bottom, #222222, #111111);
+    background-repeat: repeat-x;
+    border-color: #252525;
 }
+
+.nav > li > a {
+	
+}
+
 
 h1 {
 	font-size: 45px;
