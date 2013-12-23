@@ -41,7 +41,10 @@
 							<a href="/store">Sortiment</a>
 						</li>
 						<li>
-							<a href="/news">News</a>
+							<a href="/news">Aktuell</a>
+						</li>
+						<li>
+							<a href="/news">Suche</a>
 						</li>
 					</ul>
 				</div>
