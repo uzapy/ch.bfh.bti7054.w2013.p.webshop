@@ -1,24 +1,47 @@
-html{
+html {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 14px;
+}
+
+body {
 	margin: 0;
 	padding: 0;
 }
+
 nav {
-	position: fixed;
-	float: left;
-	margin-left: auto;
-	margin-right: auto;
+	left: 0;
+	right: 0;
+	top: 0;
+	font-size: large;
+	display: block;
+	height: 40px;
+	background-color: #1B1B1B;
 }
 
-.nav {
+.nav-list {
 	list-style: none outside none;
+	left: 50%;
 }
 
-.nav > li {
+.nav-list > li {
     float: left;
 }
 
-.nav > li > a {
+.nav-list > li > a {
+	color: #999999;
 	padding: 10px 15px;
 	text-decoration: none;
 	display: block;
+}
+
+h1 {
+	font-size: 36px;
+}
+
+header {
+	padding: 40px 20px;
+}
+
+.content {
+	padding: 0 20px;
 }

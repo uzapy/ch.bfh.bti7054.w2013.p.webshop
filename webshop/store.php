@@ -53,11 +53,11 @@
 		</nav>
 		
 		<header>
-			<h1>Plattelade</h1>
+			<h1>Sortiment</h1>
 		</header>
 
 		<div class="content">
-			<?php first_echo() ?>
+			Content
 		</div>
 
 		<footer>
