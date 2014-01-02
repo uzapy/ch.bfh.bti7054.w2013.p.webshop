@@ -19,51 +19,6 @@
 		<link rel="stylesheet" href="CSS/screen/layout.css" type="text/css" media="screen" title="Screen"/>
 		<link rel="alternate stylesheet" href="CSS/handheld/mobile.css" type="text/css" media="handheld" title="Handheld"/>
 		
-		<script language="php">
-			require("PHP/basic.php");
-		</script>
+		<title>Plattelade - <? echo $title; ?></title>
 		
-		<title>Plattelade</title>
 	</head>
-
-	<body>
-		<nav>
-			<div class="navigation">
-				<ul class="nav-list">
-					<li>
-						<a href="/webshop/start.php">Plattelade</a>
-					</li>
-					<li>
-						<a href="/webshop/store.php">Sortiment</a>
-					</li>
-					<li>
-						<a href="/webshop/news.php">Aktuell</a>
-					</li>
-					<li>
-						<a href="/webshop/contact.php">Kontakt</a>
-					</li>
-					<li>
-						<a href="/webshop/search.php">Suche</a>
-					</li>
-					<li>
-						<a href="/webshop/login.php">Login</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-		
-		<header>
-			<h1>Aktuell</h1>
-		</header>
-
-		<div class="content">
-			Content
-		</div>
-
-		<footer>
-<!-- 			<p> -->
-<!-- 				<tt>Footer</tt> -->
-<!-- 			</p> -->
-		</footer>
-	</body>
-</html>

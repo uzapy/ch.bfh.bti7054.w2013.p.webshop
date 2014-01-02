@@ -1,0 +1,7 @@
+Willkommen=Welcome
+Plattelade=Plattelade
+Sortiment=Assortment
+Kontakt=Contact
+Suche=Search
+Registrieren=Register
+Login=Login
