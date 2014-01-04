@@ -39,8 +39,14 @@ class Translator {
         }
     }
     
-    public function getCurrent() {
-    	return $this->language;
+//     public function getCurrent() {
+//     	return $this->language;
+//     }
+    
+    public function getLangUrl() {
+    	if(isset($_GET['lang'])) {
+    		return '&lang=' . $this->language;
+    	}
     }
 }
 ?>

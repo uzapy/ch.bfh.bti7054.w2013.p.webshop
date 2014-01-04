@@ -1,6 +1,9 @@
 <?php
-// 	function first_echo()
-// 	{
-// 		echo "I wrote something in PHP.";
-// 	}
+$menu_items = array(
+		'start' => 'Plattelade',
+		'store' => 'Sortiment',
+		'contact' => 'Kontakt',
+		'search' => 'Suche',
+		'register' => 'Registrieren',
+		'login' => 'Login');
 ?>

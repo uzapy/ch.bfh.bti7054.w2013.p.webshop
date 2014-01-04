@@ -12,3 +12,4 @@ Label=Label
 Stil=Style
 Details=Details
 Das gesuchte Element konnte nicht gefunden werden.=Could not find specified item.
+Kaufen=Buy Now

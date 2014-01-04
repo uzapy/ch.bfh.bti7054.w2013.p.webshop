@@ -5,14 +5,7 @@ header("Cache-Control: no-cache");
 header("Pragma: no-cache");
 header("Cache-Control: post-check=0, pre-check=0", FALSE);
 
-$menu_items = array(
-		'start' => 'Plattelade',
-		'store' => 'Sortiment',
-		'contact' => 'Kontakt',
-		'search' => 'Suche',
-		'register' => 'Registrieren',
-		'login' => 'Login');
-
+include 'php/basic.php';
 include 'php/db_connection.php';
 include 'php/translator.php';
 include 'php/get_variables.php';
@@ -28,17 +21,12 @@ include 'php/html_header.php';
 					foreach($menu_items as $key => $name)
 					{
 						// Seiten-Key
-						echo '<li><a href="?site=' . $key;
-						
+						echo '<li><a href="?site='.$key;
 						// Sprache falls definiert
-						if(isset($_GET['lang'])) {
-							echo '&lang=' . $translator->getCurrent() . '"';
-						}
-													
-						echo '"';
+						echo $translator->getLangUrl().'"';
 						
 						// Aktiven Link hervorheben
-						if($key==$title){
+						if(isset($site) && $key==$site){
 							echo ' class="active"';
 						}
 						
@@ -51,7 +39,7 @@ include 'php/html_header.php';
 		</nav>
 		
 		<header>
-			<h1><? echo $translator->get($title); ?></h1>
+			<h1><? echo $translator->get($title) ?></h1>
 		</header>
 
 		<div class="content">

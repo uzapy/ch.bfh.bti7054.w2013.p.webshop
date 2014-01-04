@@ -7,6 +7,9 @@ body {
 	margin: 0;
 	padding: 0;
 }
+a {
+	text-decoration: none;
+}
 
 /* Navigation */
 nav {
@@ -26,8 +29,11 @@ nav {
 .nav-list > li > a {
 	color: #999999;
 	padding: 10px 15px;
-	text-decoration: none;
 	display: block;
+}
+
+.nav-list > li > a:hover {
+	color: #CCCCCC;
 }
 
 .nav-list > li > a.active {
@@ -79,4 +85,11 @@ header {
 	width: auto;
 	height: auto;
 	margin-right: 10px;
+}
+
+.link {
+	color: black;
+}
+a.link:hover {
+	color: #999999;
 }
