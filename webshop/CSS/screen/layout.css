@@ -8,6 +8,7 @@ body {
 	padding: 0;
 }
 
+/* Navigation */
 nav {
 	left: 0;
 	right: 0;
@@ -33,6 +34,7 @@ nav {
 	color: #CCCCCC;
 }
 
+/* Header */
 h1 {
 	font-size: 36px;
 }
@@ -48,6 +50,7 @@ header {
 	padding: 0 20px;
 }
 
+/* Sortiment */
 .platte {
 	border-bottom: 1px solid #CCCCCC;
 	padding: 5px 0 2px;
@@ -67,5 +70,13 @@ header {
 }
 
 .album_details {
+	margin-right: 10px;
+}
+
+/* Details */
+.detail_cover {
+	max-width: 150px;
+	width: auto;
+	height: auto;
 	margin-right: 10px;
 }

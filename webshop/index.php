@@ -5,14 +5,6 @@ header("Cache-Control: no-cache");
 header("Pragma: no-cache");
 header("Cache-Control: post-check=0, pre-check=0", FALSE);
 
-// DB-Connect 
-$mysql = new mysqli("localhost", "root", "root");
-$mysql->select_db("plattelade");
-
-require_once 'php/translator.php';
-
-include 'php/get_variables.php';
-
 $menu_items = array(
 		'start' => 'Plattelade',
 		'store' => 'Sortiment',
@@ -21,6 +13,9 @@ $menu_items = array(
 		'register' => 'Registrieren',
 		'login' => 'Login');
 
+include 'php/db_connection.php';
+include 'php/translator.php';
+include 'php/get_variables.php';
 include 'php/html_header.php';
 
 ?>
@@ -56,15 +51,19 @@ include 'php/html_header.php';
 		</nav>
 		
 		<header>
-			<h1><? echo $menu_items[$title]; ?></h1>
+			<h1><? echo $translator->get($title); ?></h1>
 		</header>
 
 		<div class="content">
 		
-		<?php		
+		<?		
 		// Content-Seite laden
-		if (file_exists($title.".php")) {
-			include $title.".php";
+		if (isset($_GET['item'])) {
+			include "detail.php";
+		} else if (isset($_GET['site']) && file_exists($site.".php")) {
+			include $site.".php";
+		} else {
+			include 'start.php';
 		}
 		?>
 
@@ -78,4 +77,4 @@ include 'php/html_header.php';
 	</body>
 </html>
 
-<?php $mysql->close(); ?>
+<? $mysql->close(); ?>

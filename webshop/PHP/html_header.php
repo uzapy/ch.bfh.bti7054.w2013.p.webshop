@@ -17,5 +17,5 @@
 		<link rel="stylesheet" href="CSS/screen/layout.css" type="text/css" media="screen" title="Screen"/>
 		<link rel="alternate stylesheet" href="CSS/handheld/mobile.css" type="text/css" media="handheld" title="Handheld"/>
 		
-		<title>Plattelade - <? echo $menu_items[$title]; ?></title>
+		<title>Plattelade - <? echo $title ?></title>
 	</head>
