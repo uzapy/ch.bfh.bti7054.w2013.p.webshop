@@ -9,9 +9,9 @@ header("Cache-Control: post-check=0, pre-check=0", FALSE);
 $mysql = new mysqli("localhost", "root", "root");
 $mysql->select_db("plattelade");
 
-require_once 'php/translation.php';
+require_once 'php/translator.php';
+
 include 'php/get_variables.php';
-include 'php/html_header.php';
 
 $menu_items = array(
 		'start' => 'Plattelade',
@@ -20,6 +20,9 @@ $menu_items = array(
 		'search' => 'Suche',
 		'register' => 'Registrieren',
 		'login' => 'Login');
+
+include 'php/html_header.php';
+
 ?>
 
 	<body>
@@ -29,15 +32,23 @@ $menu_items = array(
 				<?
 					foreach($menu_items as $key => $name)
 					{
-						echo '<li><a href="?site=' . $key . '"';
+						// Seiten-Key
+						echo '<li><a href="?site=' . $key;
 						
+						// Sprache falls definiert
+						if(isset($_GET['lang'])) {
+							echo '&lang=' . $translator->getCurrent() . '"';
+						}
+													
+						echo '"';
+						
+						// Aktiven Link hervorheben
 						if($key==$title){
 							echo ' class="active"';
 						}
 						
-						echo '>';
-						$translate->get($name);
-						echo '</a></li>';
+						// †bersetzte Link-Bezeichung
+						echo '>' . $translator->get($name) . '</a></li>';
 					}
 				?>
 				</ul>
@@ -50,10 +61,8 @@ $menu_items = array(
 
 		<div class="content">
 		
-		<?php
-		
-		$translate->get('Willkommen');
-		
+		<?php		
+		// Content-Seite laden
 		if (file_exists($title.".php")) {
 			include $title.".php";
 		}

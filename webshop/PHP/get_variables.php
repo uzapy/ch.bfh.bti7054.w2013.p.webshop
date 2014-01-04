@@ -6,9 +6,9 @@ if(isset($_GET['site'])) {
 }
 
 if(isset($_GET['lang'])) {
-	$translate = new Translator($_GET['lang']);
-} else{
-	$translate = new Translator('en');	
+	$translator = new Translator($_GET['lang']);
+} else {
+	$translator = new Translator('de');	
 }
 
 ?>

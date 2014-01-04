@@ -18,11 +18,6 @@ nav {
 	background-color: #1B1B1B;
 }
 
-.nav-list {
-	list-style: none outside none;
-	left: 50%;
-}
-
 .nav-list > li {
     float: left;
 }
@@ -41,11 +36,36 @@ nav {
 h1 {
 	font-size: 36px;
 }
+h4 {
+	margin-bottom: 10px;
+}
 
 header {
-	padding: 40px 20px;
+	padding: 40px 20px 30px;
 }
 
 .content {
 	padding: 0 20px;
+}
+
+.platte {
+	border-bottom: 1px solid #CCCCCC;
+	padding: 5px 0 2px;
+	clear: both;
+}
+
+.album_cover {
+	max-width: 64px;
+	width: auto;
+	height: auto;
+	margin-right: 10px;
+}
+
+.album_info {
+	vertical-align: top;
+	display: inline-block;
+}
+
+.album_details {
+	margin-right: 10px;
 }
