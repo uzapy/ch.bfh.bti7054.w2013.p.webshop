@@ -16,7 +16,7 @@ if ($result->num_rows == 1) {
 			<span class="album_details"><? echo $translator->get("Genre") .': '. $album->Genre;?></span>
 			<span class="album_details"><? echo $translator->get("Land")  .': '. $album->Country ?></span>
 			<p><? echo $translator->get("Stil") .': '. $album->Style ?></p>
-			<a class="link" href="?buy=<? echo $album->ID . $translator->getLangUrl() ?>">
+			<a class="link" href="?site=customize&item=<? echo $album->ID . $translator->getLangUrl() ?>">
 				<? echo $translator->get("Kaufen") ?>
 			</a>
 		</div>
