@@ -5,14 +5,12 @@ header("Cache-Control: no-cache");
 header("Pragma: no-cache");
 header("Cache-Control: post-check=0, pre-check=0", FALSE);
 
-include 'php/basic.php';
+include 'php/sites.php';
 include 'php/db_connection.php';
 include 'php/translator.php';
 include 'php/get_variables.php';
 include 'php/html_header.php';
-
 ?>
-
 	<body>
 		<nav>
 			<div class="navigation">
@@ -26,7 +24,7 @@ include 'php/html_header.php';
 						echo $translator->getLangUrl().'"';
 						
 						// Aktiven Link hervorheben
-						if(isset($site) && $key==$site){
+						if($key==$site){
 							echo ' class="active"';
 						}
 						
@@ -46,9 +44,7 @@ include 'php/html_header.php';
 		
 		<?		
 		// Content-Seite laden
-		if (isset($_GET['item'])) {
-			include "detail.php";
-		} else if (isset($_GET['site']) && file_exists($site.".php")) {
+		if (isset($_GET['site']) && file_exists($site.".php")) {
 			include $site.".php";
 		} else {
 			include 'start.php';

@@ -14,9 +14,9 @@ if ($result->num_rows == 1) {
 			<span class="album_details"><? echo $translator->get("Jahr")  .': '. $album->Year ?></span>
 			<span class="album_details"><? echo $translator->get("Label") .': '. $album->Label ?></span>
 			<span class="album_details"><? echo $translator->get("Genre") .': '. $album->Genre;?></span>
-			<span class="album_details"><? echo $translator->get("Land")  .': '. $album->Country ?></span>
+			<span class="album_details"><? echo $translator->get("Land")  .': '. $translator->get($album->Country) ?></span>
 			<p><? echo $translator->get("Stil") .': '. $album->Style ?></p>
-			<a class="link" href="?site=customize&item=<? echo $album->ID . $translator->getLangUrl() ?>">
+			<a class="link" href="?site=order&item=<? echo $album->ID . $translator->getLangUrl() ?>">
 				<? echo $translator->get("Kaufen") ?>
 			</a>
 		</div>
