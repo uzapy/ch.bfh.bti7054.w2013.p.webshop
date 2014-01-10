@@ -22,7 +22,6 @@ if ($result->num_rows == 1) {
 		</div>
 	</div>
 	<?
-	
 } else {
 	echo $translator->get ( 'Das gesuchte Element konnte nicht gefunden werden.');
 }
