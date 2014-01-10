@@ -1,4 +1,4 @@
-<form accept-charset="utf-8" id="registerForm" autocomplete="on" action="?site=start" method="POST" name="registerForm">
+<form accept-charset="utf-8" id="registerForm" autocomplete="on" action="?site=start" method="POST" name="registerForm" onsubmit="return validateForm();">
 
 	<fieldset>
 		<p>
@@ -20,17 +20,17 @@
 		</p>
 		<p>
 			<label for="phone"><? echo $translator->get("Telefonnummer") ?>:</label>
-			<input id="phone" name="phone" type="text" placeholder="031 123 45 67" />
+			<input id="phone" name="phone" type="number" placeholder="031 123 45 67" />
 		</p>
 		<p>
 			<label for="street"><? echo $translator->get("Strasse") ?>:</label>
 			<input id="street" name="street" type="text" required="required" />
 			<label for="number"><? echo $translator->get("Nummer") ?>:</label>
-			<input id="number" name="number" type="text" required="required" />
+			<input id="number" name="number" type="number" required="required" />
 		</p>
 		<p>
 			<label for="postal"><? echo $translator->get("PLZ") ?>:</label>
-			<input id="postal" name="postal" type="text" required="required" />
+			<input id="postal" name="postal" type="number" required="required" />
 			<label for="city"><? echo $translator->get("Ort") ?>:</label>
 			<input id="city" name="city" type="text" required="required" />
 		</p>
@@ -45,3 +45,19 @@
 		<input type="submit" value="<? echo $translator->get("Registrieren") ?>" />
 	</fieldset>
 </form>
+
+<script type="text/javascript">
+<!--
+function validateForm()
+{
+var x=document.forms["registerForm"]["email"].value;
+var atpos=x.indexOf("@");
+var dotpos=x.lastIndexOf(".");
+if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+  {
+  alert("Bitte Email Adresse korrekt eingeben");
+  return false;
+  }
+}
+-->
+</script>

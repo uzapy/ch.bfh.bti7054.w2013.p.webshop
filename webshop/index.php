@@ -1,6 +1,11 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 
+header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Datum in der Vergangenheit
+
+session_start();
+
 include 'php/sites.php';
 include 'php/db_connection.php';
 include 'php/get_variables.php';
@@ -11,6 +16,7 @@ $translator = new Translator($lang);
 $title = $translator->get($sites[$site]);
 
 include 'php/html_header.php';
+
 ?>
 	<body>
 		<nav>
