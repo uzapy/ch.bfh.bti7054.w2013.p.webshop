@@ -1,0 +1,15 @@
+*.name
+
+*.container
+
+*.prefs
+
+*.settings
+
+*.jsdtscope
+
+*.project
+
+*.buildpath
+
+webshop/Resources/.gitignore
