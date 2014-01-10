@@ -1,10 +1,15 @@
 <?php
+<<<<<<< HEAD
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") ." GMT");
 header("Cache-Control: no-cache");
 header("Pragma: no-cache");
 header("Cache-Control: post-check=0, pre-check=0", FALSE);
 
+header('Content-Type: text/html; charset=utf-8');
+
+=======
+>>>>>>> 2b999c52d01a98893fbbce538fa8962e52f7d0ad
 include 'php/sites.php';
 include 'php/db_connection.php';
 include 'php/get_variables.php';
