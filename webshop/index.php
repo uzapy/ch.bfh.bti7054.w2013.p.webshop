@@ -14,6 +14,7 @@ include 'php/sites.php';
 include 'php/db_connection.php';
 include 'php/get_variables.php';
 include 'php/post_variables.php';
+include 'php/session';
 include 'php/translator.php';
 
 $translator = new Translator($lang);
