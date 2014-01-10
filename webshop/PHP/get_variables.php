@@ -7,8 +7,9 @@ if(isset($_GET['site'])) {
 
 if (isset($_GET['item'])) {
 	$item = $_GET['item'];
+} else {
+	unset($item);
 }
-
 if(isset($_GET['lang'])) {
 	$lang = $_GET['lang'];
 } else {

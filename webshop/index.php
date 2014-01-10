@@ -35,6 +35,13 @@ include 'php/html_header.php';
 				?>
 				</ul>
 			</div>
+			<div>
+				<?
+					$i = isset($item) ? '&item='.$item : "";
+				?>
+				<a href="?site=<? echo $site . $i; ?>&lang=de" >DE</a>
+				<a href="?site=<? echo $site . $i; ?>&lang=en" >EN</a>
+			</div>
 		</nav>
 		
 		<header>
