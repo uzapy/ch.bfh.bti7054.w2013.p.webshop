@@ -7,13 +7,12 @@ $sites = array (
 		'register' => 'Registrieren',
 		
 		'detail' => 'Details',
-		'order' => 'Bestellung anpassen',
 		'cart' => 'Warenkorb',
-		'confirmation' => 'BestŠtigung'
+		'order' => 'Bestellung anpassen',
 );
 
 $restricted_sites = array (
-		'order' => 'Bestellung anpassen',
+		'checkout' => 'Bestellung bestŠtigen',
 );
 
 $menu_items = array (
