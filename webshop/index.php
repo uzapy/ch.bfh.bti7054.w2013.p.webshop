@@ -1,6 +1,8 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 
+session_start();
+
 include 'php/sites.php';
 include 'php/db_connection.php';
 include 'php/get_variables.php';
@@ -8,6 +10,14 @@ include 'php/post_variables.php';
 include 'php/translator.php';
 
 $translator = new Translator($lang);
+
+if (isset($_SESSION['kunde'])) {
+	unset($sites['login']);
+	unset($menu_items['login']);
+	$sites['logout'] = 'Logout';
+	$menu_items['logout'] = 'Logout';
+}
+
 $title = $translator->get($sites[$site]);
 
 include 'php/html_header.php';
@@ -32,15 +42,23 @@ include 'php/html_header.php';
 						// †bersetzte Link-Bezeichung
 						echo '>' . $translator->get($name) . '</a></li>';
 					}
+					
+					if (isset($_SESSION['kunde'])) {
+						echo '<li><span class="user-hint">('.
+							$translator->get("eingeloggt als") . ' ' . $_SESSION['kunde'] .')</span></li>';
+					}
 				?>
 				</ul>
+				
 			</div>
-			<div>
+			<div class="language-links">
 				<?
 					$itemPost = isset($item) ? '&item='.$item : "";
 				?>
-				<a class="language-link" href="?site=<? echo $site . $itemPost; ?>&lang=de" >DE</a>
-				<a class="language-link" href="?site=<? echo $site . $itemPost; ?>&lang=en" >EN</a>
+				<a class="language-link<? echo $translator->getActiveLang('de'); ?>"
+					href="?site=<? echo $site . $itemPost; ?>&lang=de" >de</a>
+				<a class="language-link<? echo $translator->getActiveLang('en'); ?>"
+					href="?site=<? echo $site . $itemPost; ?>&lang=en" >en</a>
 			</div>
 		</nav>
 		

@@ -44,5 +44,11 @@ class Translator {
     		return '&lang=' . $this->language;
     	}
     }
+    
+    public function getActiveLang($str) {
+    	if ($str == $this->language) {
+    		return ' active';
+    	}
+    }
 }
 ?>

@@ -7,8 +7,8 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 	$email = stripslashes($email);
 	$password = stripslashes($password);
 	
-	$email = mysql_real_escape_string($email);
-	$password = mysql_real_escape_string($password);
+	$email = $mysql->real_escape_string($email);
+	$password = $mysql->real_escape_string($password);
 	
 	$query = "SELECT * FROM Kunden WHERE EMail = '$email';";
 	if ($result = $mysql->query($query)) {
@@ -17,7 +17,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 		
 			if (password_verify($password, $kunde->Password)) {
 				$site = 'start';
-				session_register($kunde->ID);
+				$_SESSION['kunde'] = $kunde->EMail;
 			} else {
 				$site = 'login'; // TODO: Meldung: passwort stimmt nicht
 			}
@@ -27,6 +27,11 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 	} 
 }
 
+//logout
+if ($site == 'logout') {
+	unset($_SESSION['kunde']);
+	$site = 'start';
+}
 
 //registrierung
 if (isset($_POST['email']) 
@@ -43,7 +48,7 @@ if (isset($_POST['email'])
 	
 	$mysql->query($sql_adress);
 	
-	$sql_kunde = 'INSERT INTO `Kunden` (`FirstName` ,`LastName` ,`EMail` ,`Password` ,`PhoneNumber` ,`LastFmUser` ,`AddressID`) VALUES (\''.$_POST['firstname'].'\', \''.$_POST['lastname'].'\', \''.$_POST['email'].'\', \''.$_POST['password'].'\', \''.$_POST['phone'].'\', \''.$_POST['lastfm'].'\', \''.$mysql->insert_id.'\');';
+	$sql_kunde = 'INSERT INTO `Kunden` (`FirstName` ,`LastName` ,`EMail` ,`Password` ,`PhoneNumber` ,`LastFmUser` ,`AddressID`) VALUES (\''.$_POST['firstname'].'\', \''.$_POST['lastname'].'\', \''.$_POST['email'].'\', \''.password_hash($_POST['password'], PASSWORD_DEFAULT).'\', \''.$_POST['phone'].'\', \''.$_POST['lastfm'].'\', \''.$mysql->insert_id.'\');';
 	
 	$mysql->query($sql_kunde);
 

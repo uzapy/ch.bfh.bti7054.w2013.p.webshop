@@ -32,12 +32,30 @@ nav {
 	display: block;
 }
 
-.nav-list > li > a:hover {
+.language-links {
+	float: right;
+}
+
+.language-link {
+	color: #999999;
+	padding: 10px 15px 10px 0;
+	float: left;
+	display: block;
+}
+
+.nav-list > li > a:hover, .language-link:hover {
 	color: #CCCCCC;
 }
 
-.nav-list > li > a.active {
+.nav-list > li > a.active, .language-link.active {
 	color: #CCCCCC;
+}
+
+.user-hint {
+	font-size: x-small;
+	color: #999999;
+	padding: 15px 15px 10px 0;
+	display: block;
 }
 
 /* Header */

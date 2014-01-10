@@ -40,3 +40,4 @@ PLZ=Postal code
 Ort=City
 Passwort=Password
 Passwort wiederholen=Confirm password
+eingeloggt als=logged in as
