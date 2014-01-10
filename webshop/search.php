@@ -1,5 +1,6 @@
 <form action="?site=search" method="POST" name="suche">
-	<input name="q" type="text" maxlength="255" size="20" value="<? echo $_POST['q'];?>" /> <input type="submit" name="submit" value="Suchen" />
+	<input name="q" type="text" maxlength="255" size="20" value="<? echo isset($_POST['q']) ? $_POST['q'] : ""; ?>" />
+	<input type="submit" name="submit" value="Suchen" />
 </form>
 
 <br>

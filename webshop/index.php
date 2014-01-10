@@ -37,10 +37,10 @@ include 'php/html_header.php';
 			</div>
 			<div>
 				<?
-					$i = isset($item) ? '&item='.$item : "";
+					$itemPost = isset($item) ? '&item='.$item : "";
 				?>
-				<a href="?site=<? echo $site . $i; ?>&lang=de" >DE</a>
-				<a href="?site=<? echo $site . $i; ?>&lang=en" >EN</a>
+				<a class="language-link" href="?site=<? echo $site . $itemPost; ?>&lang=de" >DE</a>
+				<a class="language-link" href="?site=<? echo $site . $itemPost; ?>&lang=en" >EN</a>
 			</div>
 		</nav>
 		
