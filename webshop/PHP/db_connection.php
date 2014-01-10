@@ -2,4 +2,6 @@
 // DB-Connection
 $mysql = new mysqli("localhost", "root", "root");
 $mysql->select_db("plattelade");
+$mysql->query("SET NAMES 'utf8'");
+
 ?>

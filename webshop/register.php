@@ -1,4 +1,5 @@
-<form id="registerForm" autocomplete="on">
+<form accept-charset="utf-8" id="registerForm" autocomplete="on" action="?site=start" method="POST" name="registerForm">
+
 	<fieldset>
 		<p>
 			<label for="email"><? echo $translator->get("E-Mail Adresse") ?>:</label>
