@@ -9,5 +9,6 @@
 			<input id="password" name="password" required="required" type="password" placeholder="password" />
 		</p>
 		<input type="submit" value="Login" />
+		<a href="?site=register<? echo $translator->getLangUrl() ?>">Registrieren</a>
 	</fieldset>
 </form>

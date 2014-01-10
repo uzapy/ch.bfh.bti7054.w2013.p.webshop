@@ -9,6 +9,7 @@ $sites = array (
 		'detail' => 'Details',
 		'cart' => 'Warenkorb',
 		'order' => 'Bestellung anpassen',
+		'checkout' => 'Bestellung bestŠtigen',
 );
 
 $restricted_sites = array (
