@@ -1,6 +1,8 @@
 <?php
 if(isset($_GET['site'])) {
 	$site = $_GET['site'];
+} else {
+	$site = 'start';
 }
 
 if (isset($_GET['item'])) {
@@ -8,10 +10,8 @@ if (isset($_GET['item'])) {
 }
 
 if(isset($_GET['lang'])) {
-	$translator = new Translator($_GET['lang']);
+	$lang = $_GET['lang'];
 } else {
-	$translator = new Translator('de');	
+	$lang = 'de';	
 }
-
-$title = $translator->get($sites[$site]);
 ?>

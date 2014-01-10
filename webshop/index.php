@@ -7,8 +7,13 @@ header("Cache-Control: post-check=0, pre-check=0", FALSE);
 
 include 'php/sites.php';
 include 'php/db_connection.php';
-include 'php/translator.php';
 include 'php/get_variables.php';
+include 'php/post_variables.php';
+include 'php/translator.php';
+
+$translator = new Translator($lang);
+$title = $translator->get($sites[$site]);
+
 include 'php/html_header.php';
 ?>
 	<body>
@@ -41,13 +46,10 @@ include 'php/html_header.php';
 		</header>
 
 		<div class="content">
-		
-		<?		
+		<?	
 		// Content-Seite laden
-		if (isset($_GET['site']) && file_exists($site.".php")) {
+		if (file_exists($site.".php")) {
 			include $site.".php";
-		} else {
-			include 'start.php';
 		}
 		?>
 

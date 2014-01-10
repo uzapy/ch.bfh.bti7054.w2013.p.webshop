@@ -1,10 +1,4 @@
-<script type="text/javascript">
-function form_validation () {
-	// alert('test');
-}
-</script>
-
-<form action="javascript: form_validation();" method="POST" name="login">
+<form action="?site=start<? echo $translator->getLangUrl() ?>" method="POST" name="login">
 	<fieldset>
 		<p>
 			<label for="email"><? echo $translator->get("E-Mail Adresse") ?>:</label>
@@ -12,7 +6,7 @@ function form_validation () {
 		</p>
 		<p>
 			<label for="password"><? echo $translator->get("Passwort") ?>:</label>
-			<input id="password" name="password" required="required" type="password" placeholder="X8df!90EO" />
+			<input id="password" name="password" required="required" type="password" placeholder="password" />
 		</p>
 		<input type="submit" value="Login" />
 	</fieldset>
