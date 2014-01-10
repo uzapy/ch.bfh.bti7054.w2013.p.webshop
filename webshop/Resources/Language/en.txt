@@ -30,6 +30,7 @@ Schweden=Sweden
 Belgien=Belgium
 Benutzerkonto erstellen=Create an account
 E-Mail Adresse=E-mail address
+Last.fm Benutzername=Last.fm username
 Vorname=Firstname
 Nachname=Lastname
 Telefonnummer=Phone number

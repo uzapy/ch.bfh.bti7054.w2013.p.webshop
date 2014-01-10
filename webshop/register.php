@@ -5,6 +5,10 @@
 			<input id="email" name="email" required="required" type="text" placeholder="mymail@mail.com" />
 		</p>
 		<p>
+			<label for="lastfm"><? echo $translator->get("Last.fm Benutzername") ?>:</label>
+			<input id="lastfm" name="lastfm" type="text" />
+		</p>
+		<p>
 			<label for="firstname"><? echo $translator->get("Vorname") ?>:</label>
 			<input id="firstname" name="firstname" required="required"
 				type="text" />

@@ -2,7 +2,6 @@
 $sites = array (
 		'start' => 'Plattelade',
 		'store' => 'Sortiment',
-		// 'contact' => 'Kontakt',
 		'search' => 'Suche',
 		'register' => 'Registrieren',
 		'login' => 'Login',
@@ -16,9 +15,7 @@ $sites = array (
 $menu_items = array (
 		'start' => 'Plattelade',
 		'store' => 'Sortiment',
-		// 'contact' => 'Kontakt',
 		'search' => 'Suche',
-		'register' => 'Registrieren',
 		'login' => 'Login' 
 );
 ?>
