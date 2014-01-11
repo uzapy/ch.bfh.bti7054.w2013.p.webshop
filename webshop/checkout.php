@@ -22,13 +22,25 @@ mysql insert
 	
 	foreach ($_SESSION["warenkorb"] as $key => $value) {
 	
-	if(isset($value["album_id"])) {
-		$query = "SELECT * FROM Platten WHERE ID = ".$value["album_id"];
+	$a_id = $value->getID();
+
+	
+	if(isset($a_id)) {
+		
+		$a_count = $value->getCount();	
+		$a_digi = $value->getWithDigital();
+	
+		$query = "SELECT * FROM Platten WHERE ID = ".$a_id;
 		
 		if ($result = $mysql->query($query)) {
 		
 			$platte = $result->fetch_object();
-			$preis = ((int)$platte->Price)*(int)$value["anzahl"];
+			$preis = ((int)$platte->Price)*(int)$a_count;
+			
+			
+			if($value->getWithDigital() == "on") {
+				$preis = $preis + 9.9;
+			}
 			
 				?>
 					<li>
@@ -41,8 +53,8 @@ mysql insert
 								<h4>
 										<? echo $platte->Artist ." - ". $platte->Album; ?>
 								</h4>
-								<span class="album_details">Anzahl: <? echo $value["anzahl"];?></span><br>
-								<span class="album_details">Digitaler Download? <? echo  ($value["digital"]=='on') ? ' JA' : 'Nein';?></span>
+								<span class="album_details">Anzahl: <? echo $a_count;?></span><br>
+								<span class="album_details">Inklusive Digitaler Download? <? echo  ($a_digi=='on') ? ' JA' : 'Nein';?></span>
 		
 								<span class="album_details rechts"> <? echo $preis;?> CHF</span>
 								

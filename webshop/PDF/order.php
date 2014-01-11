@@ -12,26 +12,25 @@ require('fpdf.php');
 	$tot_price = 0;
 	
 	foreach ($_SESSION["warenkorb"] as $key => $value) {
+	
+		$query = "SELECT * FROM Platten WHERE ID = ".$value->getID();
 		
+		if ($result = $mysql->query($query)) {
 		
-		if(isset($value["album_id"])) {
-			$query = "SELECT * FROM Platten WHERE ID = ".$value["album_id"];
+			$platte = $result->fetch_object();
+			$preis = ((int)$platte->Price)*(int)$value->getCount();
 			
-			if ($result = $mysql->query($query)) {
-			
-				$platte = $result->fetch_object();
-				$preis = ((int)$platte->Price)*(int)$value["anzahl"];
-				
-				//$pdf->Image('../Resources/Covers/'.$platte->CoverName, 10, 20, 20, 20);
-				
-				$pdf->Cell(90,10,$value["anzahl"]."x ".$platte->Artist ." - ". $platte->Album,0, 1);
-				
-				$pdf->Cell(180,10, $preis." CHF", 0, 2, 'R');
-				
-				//total preis errechnen
-				$tot_price = $tot_price + $preis;
-				
+			if($value->getWithDigital() == "on") {
+				$preis = $preis + 9.9;
 			}
+			
+			$pdf->Cell(90,10,$value->getCount()."x ".$platte->Artist ." - ". $platte->Album,0, 1);
+			
+			$pdf->Cell(180,10, $preis." CHF", 0, 2, 'R');
+			
+			//total preis errechnen
+			$tot_price = $tot_price + $preis;
+			
 		}
 	}
 	

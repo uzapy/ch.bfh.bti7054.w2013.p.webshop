@@ -66,8 +66,12 @@ if(!empty($shoppingCart)) {
 			if ($result = $mysql->query($query)) {
 			
 				$platte = $result->fetch_object();
+				
 				$preis = ((double)$platte->Price)*(int)$value->getCount();
 				
+				if($value->getWithDigital() == "on") {
+					$preis = $preis + 9.9;
+				}
 				?>
 					<li>
 						<div class="platte">
@@ -86,7 +90,7 @@ if(!empty($shoppingCart)) {
 								</span>
 								<span class="album_details">
 									<input type="checkbox" value="<? echo $platte->ID ?>" name="chk_digital[]" <? if($value->getWithDigital()=='on') { echo ' checked';}?> />
-									Digitaler Download?</span>
+									Inklusive Digitaler Download?</span>
 								
 								<span class="album_details rechts">
 									<a href="?site=cart&item=<? echo $platte->ID; ?>&del">X</a>
