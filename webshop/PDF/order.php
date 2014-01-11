@@ -28,7 +28,9 @@ foreach ($_SESSION["warenkorb"] as $key => $value) {
 			
 			//$pdf->Image('../Resources/Covers/'.$platte->CoverName, 10, 20, 20, 20);
 			
-			$pdf->Cell(80,10,$value["anzahl"]."x ".$platte->Artist ." - ". $platte->Album." | ".$preis." CHF",0, 1);
+			$pdf->Cell(90,10,$value["anzahl"]."x ".$platte->Artist ." - ". $platte->Album,0, 1);
+			
+			$pdf->Cell(180,10, $preis." CHF", 0, 2, 'R');
 			
 			//total preis errechnen
 			$tot_price = $tot_price + $preis;
@@ -40,9 +42,8 @@ foreach ($_SESSION["warenkorb"] as $key => $value) {
 
 $pdf->SetFont('Arial','B',12);
 
-$pdf->Cell(80,10,'',0, 1);
 
-$pdf->Cell(80,10,'Total: '.$tot_price.' CHF',0, 1);
+$pdf->Cell(180,10,'Total: '.$tot_price.' CHF',0, 1, 'R');
 
 
 $pdf->Output();

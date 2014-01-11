@@ -83,19 +83,21 @@ if(!empty($_SESSION["warenkorb"])) {
 							
 							<input type="hidden" name="album_id[]" value="<? echo $value["album_id"];?>">
 							
+							
 								<img class="album_cover" alt="<? echo $platte->Album ?>"
 								src="Resources/Covers/<? echo $platte->CoverName ?>" />
 								
-							<div class="album_info"">
+							<div class="album_info>
 								<h4>
-										<? echo $platte->Artist ." - ". $platte->Album ?>
+										<? echo $platte->Artist ." - ". $platte->Album; ?>
 								</h4>
 								<span class="album_details">Anzahl <input type="number" value="<? echo $value["anzahl"];?>" name="anzahl[]"></span>
-								<span class="album_details">Digitaler Download? <input type="checkbox" name="chk_digital[]" <? if($value["digital"]=='on') { echo ' checked';}?> /></span>
+								<span class="album_details"><input type="checkbox" name="chk_digital[]" <? if($value["digital"]=='on') { echo ' checked';}?> />Digitaler Download? </span>
 								
-								<span class="album_details"> <? echo $preis;?> CHF</span>
+								<span class="album_details rechts"> <a href="?site=cart&item=<? echo $value["album_id"];?>&del">X</a></span>
 								
-								<span class="album_details"> <a href="?site=cart&item=<? echo $value["album_id"];?>&del">X</a></span>
+								<span class="album_details rechts"> <? echo $preis;?> CHF</span>
+								
 							</div>
 						</div>
 					</li>
@@ -108,7 +110,23 @@ if(!empty($_SESSION["warenkorb"])) {
 		}
 	}
 	
-	echo '<li>Total: <b>'.$tot_price.' CHF</b></li> <input type="submit" name="refresh" value="Aktualisieren" /> <a href="?site=cart&clear"> Warenkorb leeren</a></form><a href="?site=checkout"> Bestellen</a><ul>';
+	echo '<li class="blank">
+	
+	<div class="platte blank">
+		<span class="album_details rechts">&nbsp;&nbsp;</span>
+		<span class="album_details rechts">Total: <b>'.number_format($tot_price, 0, '', '`').' CHF</b></span>
+	</div>
+	</li>
+	
+	<li>
+	 Warenkorb <input type="submit" name="refresh" value="aktualisieren" /> <input type="button" name="refresh" value="leeren" onclick="location.href=\'?site=cart&clear\'"/>
+	</form>
+	</li>
+	<li>
+		<br><input class="rechts" type="button" name="refresh" value="Weiter zu den Versandoptionen" onclick="location.href=\'?site=checkout\'"/>
+	
+	</li>
+<ul>';
 	
 } else {
 	echo "Der Warenkorb ist leer";

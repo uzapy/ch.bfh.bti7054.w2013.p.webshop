@@ -11,6 +11,11 @@ a {
 	text-decoration: none;
 }
 
+/* debug */
+.div, span, li {
+	border: 0px solid black;
+}
+
 /* Navigation */
 nav {
 	left: 0;
@@ -86,6 +91,7 @@ header {
 	width: auto;
 	height: auto;
 	margin-right: 10px;
+	float: left;
 }
 
 .album_info {
@@ -117,3 +123,12 @@ a.link:hover {
 	background-color: white;
 	padding: 5px;
 }
+
+.rechts {
+	float: right;
+}
+
+.blank {
+	border: 0px solid black;
+}
+
