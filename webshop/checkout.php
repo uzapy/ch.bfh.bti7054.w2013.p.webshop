@@ -10,3 +10,7 @@
 		</p>
 	</fieldset>
 </form>
+
+<br>
+
+<a href="PDF/order.php">Bestellung als PDF anzeigen</a>

@@ -46,7 +46,6 @@ if(isset($_GET["item"])) {
 			// neues album in den warebkorb
 			$_SESSION["warenkorb"][$album["album_id"]] = $album;
 		} else {
-		
 				if($w_id["album_id"] != $album["album_id"]) {
 					// neues album in den warebkorb
 					$_SESSION["warenkorb"][$album["album_id"]] = $album;

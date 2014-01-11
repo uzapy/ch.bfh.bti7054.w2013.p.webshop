@@ -111,3 +111,9 @@ header {
 a.link:hover {
 	color: #999999;
 }
+
+#ausgabe {
+	position: absolute;
+	background-color: white;
+	padding: 5px;
+}

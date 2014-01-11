@@ -1,23 +1,64 @@
+<script src="Resources/search.js"></script> 
+
+<?php
+	if(isset($_POST['q'])) {
+		$q = $_POST['q'];
+	} elseif(isset($_GET['q'])) {
+		$q = $_GET['q'];
+	}
+	
+	
+	if(isset($_POST['q'])) {
+		$col_s = $_POST['col_search'];
+	} else {
+		$col_s = "";
+	}
+?>
+
 <form action="?site=search" method="POST" name="suche">
-	<input name="q" type="text" maxlength="255" size="20" value="<? echo isset($_POST['q']) ? $_POST['q'] : ""; ?>" />
+<div id="main">
+
+<select name="col_search" id="col_search">
+	<option value="all">Alles</option>
+	<option value="Artist" <? echo $col_s == "Artist" ? "selected" : "";?> >Artist</option>
+	<option value="Album" <? echo $col_s == "Album" ? "selected" : "";?> >Album</option>
+	<option value="Year" <? echo $col_s == "Year" ? "selected" : "";?> >Jahr</option>
+	<option value="Country" <? echo $col_s == "Country" ? "selected" : "";?> >Land</option>
+	<option value="Genre" <? echo $col_s == "Genre" ? "selected" : "";?> >Genre</option>
+	<option value="Style" <? echo $col_s == "Style" ? "selected" : "";?> >Style</option>
+	<option value="Label" <? echo $col_s == "Label" ? "selected" : "";?> >Label</option>
+	<option value="Number" <? echo $col_s == "Number" ? "selected" : "";?> >Nummer</option>
+</select>
+
+	<input name="q" type="text" maxlength="255" size="20" value="<? echo isset($q) ? $q : ""; ?>" onkeyup="suggest(this.value)" autocomplete="off"/>
 	<input type="submit" name="submit" value="Suchen" />
+	<div id="ausgabe"></div> 
+</div>
 </form>
 
 <br>
 
 
 <?php
-if(isset($_POST['q'])) {
+if(isset($_POST['q']) || isset($_GET['q'])) {	
+
+	$query = "SELECT * FROM Platten WHERE ";
+		
+	if($col_s == "all" || $col_s == "") {
+		$query .= "`Artist` LIKE '%".$q."%' OR ";
+		$query .= "`Album` LIKE '%".$q."%' OR ";
+		$query .= "`Year` LIKE '%".$q."%' OR ";
+		$query .= "`Country` LIKE '%".$q."%' OR ";
+		$query .= "`Genre` LIKE '%".$q."%' OR ";
+		$query .= "`Style` LIKE '%".$q."%' OR ";
+		$query .= "`Label` LIKE '%".$q."%' OR ";
+		$query .= "`Number` LIKE '%".$q."%'";
+	} else {
+		$query .= "`".$col_s."` LIKE '%".$q."%'";
+	}
 	
-	$query = "SELECT * FROM Platten WHERE";
-	$query .= "`Artist` LIKE '%".$_POST['q']."%' OR ";
-	$query .= "`Album` LIKE '%".$_POST['q']."%' OR ";
-	$query .= "`Year` LIKE '%".$_POST['q']."%' OR ";
-	$query .= "`Country` LIKE '%".$_POST['q']."%' OR ";
-	$query .= "`Genre` LIKE '%".$_POST['q']."%' OR ";
-	$query .= "`Style` LIKE '%".$_POST['q']."%' OR ";
-	$query .= "`Label` LIKE '%".$_POST['q']."%' OR ";
-	$query .= "`Number` LIKE '%".$_POST['q']."%' ORDER BY Artist ASC";
+	$query .= " ORDER BY Artist ASC";
+	
 	
 	if ($result = $mysql->query($query)) {
 		echo '<ul class="platte">';
