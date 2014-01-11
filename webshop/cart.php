@@ -21,7 +21,7 @@ if(isset($_POST["refresh"])) {
 			$shoppingCart[$currentAlbum->getID()]->setWithDigital(null);
 		}
 	}
-} 
+}
 
 //warenkorb leeren
 if(isset($_GET["clear"])) {

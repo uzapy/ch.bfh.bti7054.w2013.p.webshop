@@ -37,7 +37,7 @@ mysql insert
 								<img class="album_cover" alt="<? echo $platte->Album ?>"
 								src="Resources/Covers/<? echo $platte->CoverName ?>" />
 								
-							<div class="album_info>
+							<div class="album_info">
 								<h4>
 										<? echo $platte->Artist ." - ". $platte->Album; ?>
 								</h4>
