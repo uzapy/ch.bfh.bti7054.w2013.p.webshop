@@ -3,6 +3,8 @@ header('Content-Type: text/html; charset=utf-8');
 header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Datum in der Vergangenheit
 
+include 'php/cartItem.php';
+
 session_start();
 
 include 'php/sites.php';
