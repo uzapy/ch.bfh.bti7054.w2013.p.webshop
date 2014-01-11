@@ -132,3 +132,9 @@ a.link:hover {
 	border: 0px solid black;
 }
 
+.meldung {
+	padding-top: 10px;
+	padding-left: 10px;
+	text-align: left;
+}
+

@@ -71,6 +71,12 @@ include 'php/html_header.php';
 			</div>
 		</nav>
 		
+		<?
+		if (isset($meldung)) {
+			echo '<div class="meldung">'.$meldung.'</div>';
+		}
+		?>
+		
 		<header>
 			<h1><? echo $translator->get($title) ?></h1>
 		</header>

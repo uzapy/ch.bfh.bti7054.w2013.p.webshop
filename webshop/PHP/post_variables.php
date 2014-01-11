@@ -18,13 +18,15 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 		
 			if (password_verify($password, $kunde->Password)) {
 				//$site = 'start';
-
+				$meldung = "Login erfolgreich";
 				$_SESSION['kunde'] = $kunde->EMail;
 			} else {
 				$site = 'login'; // TODO: Meldung: passwort stimmt nicht
+				$meldung = "Passwort nicht korret";
 			}
 		} else {
 			$site = 'login'; // TODO: Meldung: email nicht gefunden
+			$meldung = "Email nicht gefunden";
 		}
 	} 
 }
@@ -34,6 +36,7 @@ if ($site == 'logout') {
 	unset($_SESSION['kunde']);
 	unset($_SESSION['warenkorb']);
 	$site = 'start';
+	$meldung = "Logout erfolgreich";
 }
 
 //registrierung
@@ -104,7 +107,7 @@ if(isset($_POST['bestellung_submit'])) {
 				mail_attachment($my_file, $my_path, $mail, $my_mail, $my_name, $my_replyto, $my_subject, $my_message);
 				unset($_SESSION["warenkorb"]);
 				
-				echo "Bestelllung erfolgreich übermittelt";
+				$meldung = "Bestelllung erfolgreich übermittelt";
 				
 			}
 		}
