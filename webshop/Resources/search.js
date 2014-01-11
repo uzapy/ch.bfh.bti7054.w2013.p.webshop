@@ -20,7 +20,7 @@ function suggest(suchbegriff) {
 		  return;
 		} else {
 			//URL vorbereiten, Zufallszahl umgeht den Browsercache  
-			var aufruf="../PHP/suggest.php"+"?q="+suchbegriff+"&sid="+Math.random();
+			var aufruf="PHP/suggest.php"+"?q="+suchbegriff+"&sid="+Math.random();
 			xmlHttp.onreadystatechange=stateChanged;
 			xmlHttp.open("GET",aufruf,true);
 			xmlHttp.send(null);

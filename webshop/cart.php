@@ -117,7 +117,6 @@ if(!empty($_SESSION["warenkorb"])) {
 		<span class="album_details rechts">Total: <b>'.number_format($tot_price, 0, '', '`').' CHF</b></span>
 	</div>
 	</li>
-	
 	<li>
 	 Warenkorb <input type="submit" name="refresh" value="aktualisieren" /> <input type="button" name="refresh" value="leeren" onclick="location.href=\'?site=cart&clear\'"/>
 	</form>
