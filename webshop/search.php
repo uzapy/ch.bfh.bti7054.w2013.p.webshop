@@ -1,4 +1,4 @@
-<script src="Resources/search.js"></script>
+<script src="JS/search.js"></script>
 
 <?php
 	if(isset($_POST['q'])) {

@@ -6,10 +6,8 @@ $sites = array (
 		'login' => 'Login',
 		'register' => 'Registrieren',
 		'cart' => 'Warenkorb',
-		
 		'detail' => 'Details',
 		'cart' => 'Warenkorb',
-		'order' => 'Bestellung anpassen',
 		'checkout' => 'Bestellung best&auml;tigen'
 );
 

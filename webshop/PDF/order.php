@@ -1,6 +1,5 @@
 <?php
 require('fpdf.php');
-	
 	$pdf = new FPDF();
 	$pdf->AddPage();
 	$pdf->SetFont('Arial','B',16);
@@ -34,12 +33,9 @@ require('fpdf.php');
 		}
 	}
 	
-	
 	$pdf->SetFont('Arial','B',12);
 	
-	
 	$pdf->Cell(180,10,'Total: '.$tot_price.' CHF',0, 1, 'R');
-	
 	
 	$pdf->Output('Resources/Bestellungen/bestellung_'.$order_id.'.pdf','F');
 ?>

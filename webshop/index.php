@@ -74,7 +74,6 @@ include 'php/html_header.php';
 		<?
 		if (isset($meldung)) {
 			echo '<div class="meldung">'.$meldung.'</div>';
-			//echoasdasd
 		}
 		?>
 		
