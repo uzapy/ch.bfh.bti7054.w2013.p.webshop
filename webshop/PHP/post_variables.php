@@ -1,5 +1,6 @@
 <?php
 //login
+
 if (isset($_POST['email']) && isset($_POST['password'])) {
 	$email = $_POST['email'];
 	$password = $_POST['password'];
@@ -16,7 +17,8 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 			$kunde = $result->fetch_object();
 		
 			if (password_verify($password, $kunde->Password)) {
-				$site = 'start';
+				//$site = 'start';
+
 				$_SESSION['kunde'] = $kunde->EMail;
 			} else {
 				$site = 'login'; // TODO: Meldung: passwort stimmt nicht

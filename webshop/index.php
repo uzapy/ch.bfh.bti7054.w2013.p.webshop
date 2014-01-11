@@ -22,6 +22,10 @@ if (isset($_SESSION['kunde'])) {
 	$menu_items['logout'] = 'Logout';
 }
 
+if(!isset($_SESSION['kunde']) && $site == "checkout") {
+	header("Location: ?site=login&next=checkout");
+}
+
 $title = $translator->get($sites[$site]);
 
 include 'php/html_header.php';
