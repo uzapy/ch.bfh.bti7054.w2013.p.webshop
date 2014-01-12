@@ -4,8 +4,8 @@
 
 	<fieldset>
 		<p>
-			<label for="email"><? echo $translator->get("E-Mail Adresse") ?>:</label>
-			<input id="email" name="email" required="required" type="text" placeholder="mymail@mail.com" />
+			<label for="new_email"><? echo $translator->get("E-Mail Adresse") ?>:</label>
+			<input id="new_email" name="new_email" required="required" type="text" placeholder="mymail@mail.com" />
 		</p>
 		<p>
 			<label for="lastfm"><? echo $translator->get("Last.fm Benutzername") ?>:</label>
@@ -13,8 +13,7 @@
 		</p>
 		<p>
 			<label for="firstname"><? echo $translator->get("Vorname") ?>:</label>
-			<input id="firstname" name="firstname" required="required"
-				type="text" />
+			<input id="firstname" name="firstname" required="required" type="text" />
 		</p>
 		<p>
 			<label for="lastname"><? echo $translator->get("Nachname") ?>:</label>
@@ -37,12 +36,12 @@
 			<input id="city" name="city" type="text" required="required" />
 		</p>
 		<p>
-			<label for="password"><? echo $translator->get("Passwort") ?>:</label>
-			<input id="password" name="password" required="required" type="password" placeholder="X8df!90EO" />
+			<label for="new_password"><? echo $translator->get("Passwort") ?>:</label>
+			<input id="new_password" name="new_password" required="required" type="password" placeholder="X8df!90EO" />
 		</p>
 		<p>
-			<label for="password_confirm"><? echo $translator->get("Passwort wiederholen") ?>:</label>
-			<input id="password_confirm" name="password_confirm" required="required" type="password" placeholder="X8df!90EO" />
+			<label for="new_password_confirm"><? echo $translator->get("Passwort wiederholen") ?>:</label>
+			<input id="new_password_confirm" name="new_password_confirm" required="required" type="password" placeholder="X8df!90EO" />
 		</p>
 		<input type="submit" value="<? echo $translator->get("Registrieren") ?>" />
 	</fieldset>

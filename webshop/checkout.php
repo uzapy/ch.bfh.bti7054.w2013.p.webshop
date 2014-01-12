@@ -1,22 +1,14 @@
 <?
 if(isset($_SESSION['kunde'])) {
-
-
+	
 	if(!empty($_SESSION["warenkorb"])) {
 	
 	/*
-
 x restricted
-
 email & pdf
-
 mysql insert 
-
  */
- 
- 
- 
- 
+
  echo '<ul>';
 	$tot_price = 0;
 	
