@@ -1,12 +1,4 @@
-<?php
-if(isset($_GET['next'])) {
-	$target = $_GET['next'];
-} else {
-	$target = 'start';
-}
-?>
-
-<form action="?site=<? echo $target.$translator->getLangUrl() ?>" method="POST" name="login">
+<form action="?site=<? echo $next . $translator->getLangUrl() ?>" method="POST" name="login">
 	<fieldset>
 		<p>
 			<label for="email"><? echo $translator->get("E-Mail Adresse") ?>:</label>

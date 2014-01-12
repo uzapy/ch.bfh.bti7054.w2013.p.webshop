@@ -12,18 +12,18 @@ require('fpdf.php');
 	
 	foreach ($_SESSION["warenkorb"] as $key => $value) {
 	
-		$query = "SELECT * FROM Platten WHERE ID = ".$value->getID();
+		$query = "SELECT * FROM Platten WHERE ID = ".$value->ID;
 		
 		if ($result = $mysql->query($query)) {
 		
 			$platte = $result->fetch_object();
-			$preis = ((int)$platte->Price)*(int)$value->getCount();
+			$preis = ((int)$platte->Price)*(int)$value->count;
 			
-			if($value->getWithDigital() == "on") {
+			if($value->withDigital == "on") {
 				$preis = $preis + 9.9;
 			}
 			
-			$pdf->Cell(90,10,$value->getCount()."x ".$platte->Artist ." - ". $platte->Album,0, 1);
+			$pdf->Cell(90,10,$value->count."x ".$platte->Artist ." - ". $platte->Album,0, 1);
 			
 			$pdf->Cell(180,10, $preis." CHF", 0, 2, 'R');
 			

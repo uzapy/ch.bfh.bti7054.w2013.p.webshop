@@ -22,13 +22,13 @@ mysql insert
 	
 	foreach ($_SESSION["warenkorb"] as $key => $value) {
 	
-	$a_id = $value->getID();
+	$a_id = $value->ID;
 
 	
 	if(isset($a_id)) {
 		
-		$a_count = $value->getCount();	
-		$a_digi = $value->getWithDigital();
+		$a_count = $value->count;	
+		$a_digi = $value->withDigital;
 	
 		$query = "SELECT * FROM Platten WHERE ID = ".$a_id;
 		
@@ -38,7 +38,7 @@ mysql insert
 			$preis = ((int)$platte->Price)*(int)$a_count;
 			
 			
-			if($value->getWithDigital() == "on") {
+			if($value->withDigital == "on") {
 				$preis = $preis + 9.9;
 			}
 			

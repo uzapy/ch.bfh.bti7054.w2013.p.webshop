@@ -1,6 +1,5 @@
 <?php
 //login
-
 if (isset($_POST['email']) && isset($_POST['password'])) {
 	$email = $_POST['email'];
 	$password = $_POST['password'];
@@ -11,24 +10,20 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 	$email = $mysql->real_escape_string($email);
 	$password = $mysql->real_escape_string($password);
 	
-	$query = "SELECT * FROM Kunden WHERE EMail = '$email';";
-	if ($result = $mysql->query($query)) {
-		if ($result->num_rows == 1) {
-			$kunde = $result->fetch_object();
-		
-			if (password_verify($password, $kunde->Password)) {
-				//$site = 'start';
-				$meldung = "Login erfolgreich";
-				$_SESSION['kunde'] = $kunde->EMail;
-			} else {
-				$site = 'login'; // TODO: Meldung: passwort stimmt nicht
-				$meldung = "Passwort nicht korret";
-			}
+	$kunde = $database->getKunde($email);
+	if ($kunde) {
+		if (password_verify($password, $kunde->Password)) {
+			//$site = 'start';
+			$meldung = "Login erfolgreich";
+			$_SESSION['kunde'] = $kunde->EMail;
 		} else {
-			$site = 'login'; // TODO: Meldung: email nicht gefunden
-			$meldung = "Email nicht gefunden";
+			$site = 'login';
+			$meldung = "Passwort nicht korrekt";
 		}
-	} 
+	} else {
+		$site = 'login';
+		$meldung = "Email nicht gefunden";
+	}
 }
 
 //logout
@@ -82,7 +77,7 @@ if(isset($_POST['bestellung_submit'])) {
 				foreach ($_SESSION["warenkorb"] as $key => $value) {
 				
 					//platten eintragen
-					$sql_platten= "INSERT INTO `Platten_Bestellungen` (`PlattenID`, `BestellungID`, `WithDigitalDownload`, `Anzahl`) VALUES (".$value->getID().", ".$order_id.", 0, ".$value->getCount().");";
+					$sql_platten= "INSERT INTO `Platten_Bestellungen` (`PlattenID`, `BestellungID`, `WithDigitalDownload`, `Anzahl`) VALUES (".$value->ID.", ".$order_id.", 0, ".$value->count.");";
 					//echo $sql_platten;
 					$mysql->query($sql_platten);
 					

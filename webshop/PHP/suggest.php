@@ -33,7 +33,6 @@ if ($result = $mysql->query($query)) {
 	}	
 }
 
-
 if ($result = $mysql->query($query)) {
 	while ($platte = $result->fetch_object()) {
 		$keywords[] = $platte->Number;

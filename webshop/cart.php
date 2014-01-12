@@ -13,12 +13,12 @@ if(isset($_POST["refresh"])) {
 		$chk_digital = isset($_POST["chk_digital"]) ? $_POST["chk_digital"] : null;
 		$currentAlbum = new CartItem($_POST["album_id"][$i], $_POST["anzahl"][$i], $chk_digital);
 		
-		$shoppingCart[$currentAlbum->getID()]->setCount($currentAlbum->getCount());
+		$shoppingCart[$currentAlbum->ID]->count = $currentAlbum->count;
 		
-		if($currentAlbum->getWithDigital() != null) {
-			$shoppingCart[$currentAlbum->getID()]->setWithDigital($currentAlbum->getWithDigital());
+		if($currentAlbum->withDigital != null) {
+			$shoppingCart[$currentAlbum->ID]->withDigital = $currentAlbum->withDigital;
 		} else {
-			$shoppingCart[$currentAlbum->getID()]->setWithDigital(null);
+			$shoppingCart[$currentAlbum->ID]->withDigital = null;
 		}
 	}
 }
@@ -37,13 +37,13 @@ if(isset($_GET["item"])) {
 		
 		if(empty($shoppingCart)) {
 			// neues album in den warenkorb
-			$shoppingCart[$newAlbum->getID()] = $newAlbum;
-		} else if(!isset($shoppingCart[$newAlbum->getID()])) {
+			$shoppingCart[$newAlbum->ID] = $newAlbum;
+		} else if(!isset($shoppingCart[$newAlbum->ID])) {
 			// neues album in den warenkorb
-			$shoppingCart[$newAlbum->getID()] = $newAlbum;
+			$shoppingCart[$newAlbum->ID] = $newAlbum;
 		} else  {
 			//bisheriges album um 1 erhšhen
-			$shoppingCart[$newAlbum->getID()]->increaseCount();
+			$shoppingCart[$newAlbum->ID]->increaseCount();
 		}
 	} else {
 		// album entfernen
@@ -67,9 +67,9 @@ if(!empty($shoppingCart)) {
 			
 				$platte = $result->fetch_object();
 				
-				$preis = ((double)$platte->Price)*(int)$value->getCount();
+				$preis = ((double)$platte->Price)*(int)$value->count;
 				
-				if($value->getWithDigital() == "on") {
+				if($value->withDigital == "on") {
 					$preis = $preis + 9.9;
 				}
 				?>
@@ -86,10 +86,10 @@ if(!empty($shoppingCart)) {
 									<? echo $platte->Artist ." - ". $platte->Album; ?>
 								</h4>
 								<span class="album_details">Anzahl
-									<input type="number" value="<? echo $value->getCount();?>" name="anzahl[]">
+									<input type="number" value="<? echo $value->count;?>" name="anzahl[]">
 								</span>
 								<span class="album_details">
-									<input type="checkbox" value="<? echo $platte->ID ?>" name="chk_digital[]" <? if($value->getWithDigital()=='on') { echo ' checked';}?> />
+									<input type="checkbox" value="<? echo $platte->ID ?>" name="chk_digital[]" <? if($value->withDigital=='on') { echo ' checked';}?> />
 									Inklusive Digitaler Download?</span>
 								
 								<span class="album_details rechts">
