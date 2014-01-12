@@ -13,7 +13,6 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 	$kunde = $database->getKunde($email);
 	if ($kunde) {
 		if (password_verify($password, $kunde->Password)) {
-			//$site = 'start';
 			$meldung = "Login erfolgreich";
 			$_SESSION['kunde'] = $kunde->EMail;
 		} else {

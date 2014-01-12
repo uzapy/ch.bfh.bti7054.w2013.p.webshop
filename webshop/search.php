@@ -70,7 +70,6 @@ if (isset($_POST['lastfm'])) {
 
 <form action="?site=search" method="POST" name="suche">
 	<div id="main">
-
 		<select name="col_search" id="col_search">
 			<option value="all">Alles</option>
 			<option value="Artist"
@@ -156,15 +155,14 @@ if(isset($_POST['q']) || isset($_GET['q'])) {
 	
 }
 ?>
-
-<form accept-charset="utf-8" id="registerForm" autocomplete="on"
-	action="?site=search" method="POST" name="registerForm"
+<script src="js/validation.js"></script>
+<form accept-charset="utf-8" id="registerForm" autocomplete="on" action="?site=search" method="POST" name="registerForm"
 	onsubmit="return validateForm();">
 
 	<fieldset>
 		<p>
-			<label for="lastfm">Last FM User Name:</label> <input id="lastfm"
-				name="lastfm" required="required" type="text" />
+			<label for="lastfm">Last FM User Name:</label>
+			<input id="lastfm" name="lastfm" required="required" type="text" />
 		</p>
 		<input type="submit" value="Suche" />
 	</fieldset>

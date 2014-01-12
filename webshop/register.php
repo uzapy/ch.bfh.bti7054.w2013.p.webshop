@@ -1,4 +1,6 @@
-<form accept-charset="utf-8" id="registerForm" autocomplete="on" action="?site=start" method="POST" name="registerForm" onsubmit="return validateForm();">
+<script src="js/validation.js"></script>
+<form accept-charset="utf-8" id="registerForm" autocomplete="on" action="?site=start" method="POST" name="registerForm"
+	onsubmit="return validateForm();">
 
 	<fieldset>
 		<p>
@@ -45,19 +47,3 @@
 		<input type="submit" value="<? echo $translator->get("Registrieren") ?>" />
 	</fieldset>
 </form>
-
-<script type="text/javascript">
-<!--
-function validateForm()
-{
-var x=document.forms["registerForm"]["email"].value;
-var atpos=x.indexOf("@");
-var dotpos=x.lastIndexOf(".");
-if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
-  {
-  alert("Bitte Email Adresse korrekt eingeben");
-  return false;
-  }
-}
--->
-</script>
