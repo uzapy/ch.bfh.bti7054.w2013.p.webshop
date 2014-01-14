@@ -53,56 +53,30 @@ if (isset($_POST['new_email']) && isset($_POST['firstname']) && isset($_POST['la
 
 //bestellung verarbeiten
 if(isset($_POST['bestellung_submit'])) {
-		
-		$query = "SELECT * FROM Kunden WHERE EMail = '".$_SESSION['kunde']."';";
-
-		if ($result = $mysql->query($query)) {
-
-			if($result->num_rows >= 1) {
-			
-				$kunde = $result->fetch_object();
-				$mail = $kunde->EMail;
-								
-				// Bestellung eintragen
-				$sql_bestellung = "INSERT INTO `Bestellungen` (`KundenID`, `PaymentMethod`, `ShippingMethod`, `ShippingAddressID`, `IsShipped`) VALUES (".$kunde->ID.", '".$_POST['shipping']."', '".$_POST['payment']."', ".$kunde->AddressID.", '0');";
-				
-				$mysql->query($sql_bestellung);
-				
-				$order_id = $mysql->insert_id;
-				
-				foreach ($_SESSION["warenkorb"] as $key => $value) {
-				
-					//platten eintragen
-					$sql_platten= "INSERT INTO `Platten_Bestellungen` (`PlattenID`, `BestellungID`, `WithDigitalDownload`, `Anzahl`) VALUES (".$value->ID.", ".$order_id.", 0, ".$value->count.");";
-					//echo $sql_platten;
-					$mysql->query($sql_platten);
-					
-				}
-				
-				
-				// email versenden
-				include("PHP/mailer.php");
-				
-				// pdf ersetllen
-				include("PDF/order.php");
-				
-				$my_file = "bestellung_".$order_id.".pdf"; 
-				$my_path = "Resources/Bestellungen/";
-				
-				$my_name = "Marko";
-				$my_mail = "uzapy@hotmail.com";
-				$my_replyto = "uzapy@hotmail.com";
-				$my_subject = "Bestellung Nr. ".$order_id;
-				$my_message = "Hallo,\r\nVielen Dank fuer deine Bestellung!\r\n\r\nGruss, Marko";
-				
-				mail_attachment($my_file, $my_path, $mail, $my_mail, $my_name, $my_replyto, $my_subject, $my_message);
-				unset($_SESSION["warenkorb"]);
-				
-				$meldung = "Bestelllung erfolgreich Ã¼bermittelt";
-				
-			}
-		}
-		
-	}
-
+	
+	$orderID = $database->saveOrder($_SESSION['kunde'], $_SESSION["warenkorb"], $_POST['shipping'], $_POST['payment']);
+	
+	$platten = $database->getPlatten($_SESSION["warenkorb"]);
+	
+	// pdf ersetllen
+	$pdfCreator = new PdfCreator($platten, $_SESSION["warenkorb"], $orderID);
+	$pdfCreator->create();
+	
+	// email versenden
+	include("PHP/mailHeader.php");
+	$mail = $_SESSION['kunde'];
+	$my_file = "bestellung_".$orderID.".pdf"; 
+	$my_path = "Resources/Bestellungen/";
+	
+	$my_name = "Marko";
+	$my_mail = "uzapy@hotmail.com";
+	$my_replyto = "uzapy@hotmail.com";
+	$my_subject = "Bestellung Nr. ".$orderID;
+	$my_message = "Hallo,\r\nVielen Dank fuer deine Bestellung!\r\n\r\nGruss, Marko";
+	
+	mail_attachment($my_file, $my_path, $mail, $my_mail, $my_name, $my_replyto, $my_subject, $my_message);
+	unset($_SESSION["warenkorb"]);
+	
+	$meldung = "Bestellung erfolgreich Ÿbermittelt";
+}
 ?>

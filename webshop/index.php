@@ -3,9 +3,11 @@ include 'php/database.php';
 include 'php/cartItem.php';
 
 session_start();
-
 $database = new Database();
+
 include 'php/db_connection.php';
+include 'pdf/fpdf.php';
+include 'pdf/pdfCreator.php';
 
 include 'php/get_variables.php';
 include 'php/post_variables.php';
