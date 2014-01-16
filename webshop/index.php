@@ -36,21 +36,15 @@ include 'php/html_header.php';
 		<nav>
 			<div class="navigation">
 				<ul class="nav-list">
+					<li><a  href="?site=start<? echo $translator->getLangUrl() ?>">
+						<img class="logo" alt="Logo" src="Resources/logo.png" />
+					</a></li>
 				<?
 					foreach($menu_items as $key => $name)
 					{
-						// Seiten-Key
-						echo '<li><a href="?site='.$key;
-						// Sprache falls definiert
-						echo $translator->getLangUrl().'"';
-						
-						// Aktiven Link hervorheben
-						if($key==$site){
-							echo ' class="active"';
-						}
-						
-						// †bersetzte Link-Bezeichung
-						echo '>' . $translator->get($name) . '</a></li>';
+						// Seiten-Key / Sprache falls definiert / Aktiven Link hervorheben / †bersetzte Link-Bezeichung
+						$active = $key == $site ? 'active' : '';
+						echo '<li><a class="menu ' . $active . '" href="?site=' . $key . $translator->getLangUrl() . '">' . $translator->get($name) . '</a></li>';
 					}
 					
 					if (isset($_SESSION['kunde'])) {

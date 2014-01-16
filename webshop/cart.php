@@ -9,16 +9,17 @@ $shoppingCart = $_SESSION["warenkorb"];
 //warenkorb aktualisieren
 if(isset($_POST["refresh"])) {
 
-	for($i=0;$i<=count($_POST["album_id"])-1; $i++) {
-		$chk_digital = isset($_POST["chk_digital"]) ? $_POST["chk_digital"] : null;
-		$currentAlbum = new CartItem($_POST["album_id"][$i], $_POST["anzahl"][$i], $chk_digital);
+	for($i=0; $i<=count($_POST["album_id"])-1; $i++) {
+		$chk_digital = isset( $_POST["chk_digital"] ) ? $_POST["chk_digital"] : null;
+		
+		$currentAlbum = new CartItem($_POST["album_id"][$i], $_POST["anzahl"][$i], $chk_digital );
 		
 		$shoppingCart[$currentAlbum->ID]->count = $currentAlbum->count;
 		
-		if($currentAlbum->withDigital != null) {
-			$shoppingCart[$currentAlbum->ID]->withDigital = $currentAlbum->withDigital;
+		if ($currentAlbum->withDigital != null) {
+			$shoppingCart [$currentAlbum->ID]->withDigital = $currentAlbum->withDigital;
 		} else {
-			$shoppingCart[$currentAlbum->ID]->withDigital = null;
+			$shoppingCart [$currentAlbum->ID]->withDigital = null;
 		}
 	}
 }
@@ -53,78 +54,74 @@ if(isset($_GET["item"])) {
 
 if(!empty($shoppingCart)) {
 	
-	echo '<ul><form action="?site=cart" method="POST" name="warenkorb_form">';
-	
 	$tot_price = 0;
+	
+	?><ul>
+		<form action="?site=cart" method="POST" name="warenkorb_form"><?
 	
 	foreach ($shoppingCart as $key => $value) {
 	
 		if(isset($key)) {
 			
-			$query = "SELECT * FROM Platten WHERE ID = ".$key;
-		
-			if ($result = $mysql->query($query)) {
+			$platte = $database->getPlatte($key);
 			
-				$platte = $result->fetch_object();
+			$preis = ((double)$platte->Price)*(int)$value->count;
+			
+			if($value->withDigital == "on") {
+				$preis = $preis + 9.9;
+			}
+			
+			//total preis errechnen
+			$tot_price += $preis;
 				
-				$preis = ((double)$platte->Price)*(int)$value->count;
-				
-				if($value->withDigital == "on") {
-					$preis = $preis + 9.9;
-				}
-				?>
-					<li>
-						<div class="platte">
-							
-							<input type="hidden" name="album_id[]" value="<? echo $platte->ID ?>">
-							
-								<img class="album_cover" alt="<? echo $platte->Album ?>"
-								src="Resources/Covers/<? echo $platte->CoverName ?>" />
-								
-								<div class="album_info">
-								<h4>
-									<? echo $platte->Artist ." - ". $platte->Album; ?>
-								</h4>
-								<span class="album_details">Anzahl
-									<input type="number" value="<? echo $value->count;?>" name="anzahl[]">
-								</span>
-								<span class="album_details">
-									<input type="checkbox" value="<? echo $platte->ID ?>" name="chk_digital[]" <? if($value->withDigital=='on') { echo ' checked';}?> />
-									Inklusive Digitaler Download?</span>
-								
-								<span class="album_details rechts">
-									<a href="?site=cart&item=<? echo $platte->ID; ?>&del">X</a>
-								</span>
-								
-								<span class="album_details rechts"> <? echo $preis;?> CHF</span>
-								
-							</div>
-						</div>
-					</li>
-				<?
-				
-				//total preis errechnen
-				$tot_price = $tot_price + $preis;
-				
-			}	
+		?><li>
+			<div class="platte">
+				<input type="hidden" name="album_id[]" value="<? echo $platte->ID ?>">
+		
+				<img class="album_cover" alt="<? echo $platte->Album ?>" src="Resources/Covers/<? echo $platte->CoverName ?>" />
+		
+				<div class="album_info">
+					<h4><? echo $platte->Artist ." - ". $platte->Album; ?></h4>
+					<span class="album_details">Anzahl
+						<input type="number" value="<? echo $value->count;?>" name="anzahl[]">
+					</span>
+					<span class="album_details">
+						<input type="checkbox" value="<? echo $platte->ID ?>" name="chk_digital[]"
+							<?
+							if($value->withDigital=='on') {
+								echo ' checked';
+							}?> />
+							Inklusive Digitaler Download?
+					</span>
+					<span class="album_details rechts">
+						<a href="?site=cart&item=<? echo $platte->ID; ?>&del">X</a>
+					</span>
+					<span class="album_details rechts"> <? echo $preis;?> CHF</span>
+				</div>
+			</div>
+		</li><?
 		}
 	}
 	
-	echo '<li class="blank">
-			<div class="platte blank">
-				<span class="album_details rechts">&nbsp;&nbsp;</span>
-				<span class="album_details rechts">Total: <b>'.number_format($tot_price, 0, '', '`').' CHF</b></span>
-			</div>
+		?><li class="blank">
+				<div class="platte blank">
+					<span class="album_details rechts">&nbsp;&nbsp;</span>
+					<span class="album_details rechts">Total: <b><? echo number_format($tot_price, 0, '', '`') ?> CHF</b>
+					</span>
+				</div>
+			</li>
+			<li>
+				Warenkorb
+				<input type="submit" name="refresh" value="aktualisieren" />
+				<input type="button" name="refresh" value="leeren" onclick="location.href='?site=cart&clear'"/>
+			</li>
+		</form>
+		<li>
+			<br/>
+			<input class="rechts" type="button" name="refresh" value="Weiter zu den Versandoptionen" onclick="location.href='?site=checkout'"/>
 		</li>
-		<li>Warenkorb
-			<input type="submit" name="refresh" value="aktualisieren" />
-			<input type="button" name="refresh" value="leeren" onclick="location.href=\'?site=cart&clear\'"/>
-		</li>
-	</form>
-	<li>
-		<br><input class="rechts" type="button" name="refresh" value="Weiter zu den Versandoptionen" onclick="location.href=\'?site=checkout\'"/>
-	</li>
-<ul>';
+	<ul><?
+	
 	
 } else {
 	echo "Der Warenkorb ist leer";

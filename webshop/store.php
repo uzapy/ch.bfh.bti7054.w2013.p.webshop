@@ -1,11 +1,10 @@
 <?php
-$query = "SELECT * FROM Platten";
-
-if ($result = $mysql->query($query)) {
+$allPlatten = $database->getAllPlatten();
+if ($allPlatten->num_rows > 0) {
 	
 	echo '<ul>';
 	// FŸr jedes gefundene Element
-	while ($platte = $result->fetch_object()) {
+	while ($platte = $allPlatten->fetch_object()) {
 		?>
 		<li>
 			<div class="platte">
@@ -31,7 +30,5 @@ if ($result = $mysql->query($query)) {
 	}
 	
 	echo '</ul>';
-	
-	$result->close();
 }
 ?>

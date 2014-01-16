@@ -47,6 +47,11 @@ class Database {
 		return $platten;
 	}
 	
+	public function getAllPlatten() {
+		$selectPlatten = "SELECT * FROM `Platten`";
+		return $this->mysqli->query($selectPlatten);
+	}
+	
 	public function saveKunde($firstName, $lastName, $eMail, $password, $phoneNumber, $lastFmUser, $addressID) {
 		$firstName = "'" . $this->mysqli->real_escape_string($firstName) . "'";
 		$lastName = "'" . $this->mysqli->real_escape_string($lastName) . "'";

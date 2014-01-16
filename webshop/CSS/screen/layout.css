@@ -27,11 +27,18 @@ nav {
 	background-color: #1B1B1B;
 }
 
+.logo {
+	max-height: 30px;
+	width: auto;
+	height: auto;
+	padding: 5px 15px;
+}
+
 .nav-list > li {
     float: left;
 }
 
-.nav-list > li > a {
+.menu {
 	color: #999999;
 	padding: 10px 15px;
 	display: block;
@@ -77,6 +84,16 @@ header {
 
 .content {
 	padding: 0 20px;
+}
+
+/* Start */
+.text {
+	margin: 15px 0;
+	max-width: 50%;
+}
+
+.text a {
+	text-decoration: underline;
 }
 
 /* Sortiment */

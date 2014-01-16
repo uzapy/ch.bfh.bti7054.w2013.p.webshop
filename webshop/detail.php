@@ -1,9 +1,6 @@
 <?php
-$query = 'SELECT * FROM Platten WHERE ID = ' . $item;
-$result = $mysql->query($query);
-
-if ($result->num_rows == 1) {
-	$album = $result->fetch_object();
+if ($database->getPlatte($item)) {
+	$album = $database->getPlatte($item);
 	
 	?>
 	<div class="platte">
@@ -25,6 +22,4 @@ if ($result->num_rows == 1) {
 } else {
 	echo $translator->get ( 'Das gesuchte Element konnte nicht gefunden werden.');
 }
-
-$result->close();
 ?>

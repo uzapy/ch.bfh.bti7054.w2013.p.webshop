@@ -63,7 +63,7 @@ if(isset($_POST['bestellung_submit'])) {
 	$pdfCreator->create();
 	
 	// email versenden
-	include("PHP/mailHeader.php");
+	include("PHP/mail_header.php");
 	$mail = $_SESSION['kunde'];
 	$my_file = "bestellung_".$orderID.".pdf"; 
 	$my_path = "Resources/Bestellungen/";

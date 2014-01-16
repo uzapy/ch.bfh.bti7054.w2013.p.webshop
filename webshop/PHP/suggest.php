@@ -1,63 +1,40 @@
 <?php
 //Array mit Daten beladen
-include('db_connection.php');
+//include('db_connection.php');
+include 'php/database.php';
+$database = new Database();
+$allePlatten = $database->getAllPlatten();
+$keywords = array();
 
-$query = "SELECT * FROM Platten";
-if ($result = $mysql->query($query)) {
-	while ($platte = $result->fetch_object()) {
+if ($allePlatten->num_rows > 1) {
+	while ($platte = $allePlatten->fetch_object()) {
 		$keywords[] = $platte->Artist;
-	}
-}
-
-if ($result = $mysql->query($query)) {
-	while ($platte = $result->fetch_object()) {
 		$keywords[] = $platte->Album;
-	}	
-}
-
-if ($result = $mysql->query($query)) {
-	while ($platte = $result->fetch_object()) {
 		$keywords[] = $platte->Year;
-	}	
-}
-
-if ($result = $mysql->query($query)) {
-	while ($platte = $result->fetch_object()) {
 		$keywords[] = $platte->Genre;
-	}	
-}
-
-if ($result = $mysql->query($query)) {
-	while ($platte = $result->fetch_object()) {
 		$keywords[] = $platte->Label;
-	}	
-}
-
-if ($result = $mysql->query($query)) {
-	while ($platte = $result->fetch_object()) {
-		$keywords[] = $platte->Number;
-	}	
+	}
 }
 
 $keywords = array_unique($keywords);
 
-//Suchbegriff aus der URL per GET filtern
-$q=$_GET["q"];
-//String-Länge ermitteln und falls groesser 0 -> weiter
-if (strlen($q) > 0){
+//Suchbegriff aus der URL per GET filtern / String-Länge ermitteln und falls groesser 0 -> weiter
+if (isset($_GET["q"]) && strlen($_GET["q"] > 0)) {
+	$query = $_GET["q"];
+	
 	$hint="";
-	foreach($keywords as $keyword_aktuell) {	
-  		if (strtolower($q)==strtolower(substr($keyword_aktuell,0,strlen($q)))) {
-
-      		$hint=$hint.'<div class="ergebnis"><a href="?site=search&q='.$keyword_aktuell.'">'.$keyword_aktuell.'</a></div>';
-      		
-    	}
-  	}
+	foreach($keywords as $currentKeyword) {
+		
+		if (strtolower($query) == strtolower( substr($currentKeyword, 0, strlen($query)) )) {
+	
+			$hint .= '<div class="ergebnis"><a href="?site=search&q=' . $currentKeyword . '">' . $currentKeyword . '</a></div>';
+		}
+	}
 }
 
 //Checken, ob Eintraege gefunden wurden. Wenn nicht, Fehler ausgeben
 if (empty($hint)) {
-	$response="Leider keine Eintr&auml;ge";
+	$response="Leider keine Einträge gefunden";
 }
 else{
 	$response=$hint;
