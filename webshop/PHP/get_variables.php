@@ -23,4 +23,16 @@ if (isset ( $_GET['lang'] )) {
 	$lang = 'de';
 }
 
+if (isset ( $_GET['add'] )) {
+	$addItem = $_GET['add'];
+} else {
+	unset($addItem);
+}
+
+if (isset ( $_GET['remove'] )) {
+	$removeItem = $_GET['remove'];
+} else {
+	unset($removeItem);
+}
+
 ?>

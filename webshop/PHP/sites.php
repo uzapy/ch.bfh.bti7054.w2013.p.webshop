@@ -10,10 +10,6 @@ $sites = array (
 		'checkout' => 'Bestellung bestŠtigen'
 );
 
-$restricted_sites = array (
-		'checkout' => 'Bestellung bestŠtigen'
-);
-
 $menu_items = array (
 		'start' => 'Plattelade',
 		'store' => 'Sortiment',

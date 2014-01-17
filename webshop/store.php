@@ -18,11 +18,27 @@ if ($allPlatten->num_rows > 0) {
 							<? echo $platte->Artist ." - ". $platte->Album ?>
 						</a>
 					</h4>
-					<span class="album_details"><? echo $translator->get("Jahr")  .': '. $platte->Year ?></span>
-					<span class="album_details"><? echo $translator->get("Label") .': '. $platte->Label ?></span>
-					<span class="album_details"><? echo $translator->get("Genre") .': '. $platte->Genre ?></span>
-					<span class="album_details"><? echo $translator->get("Land")  .': '. $translator->get($platte->Country) ?></span>
-					<p><? echo $translator->get("Stil") .': '. $platte->Style ?></p>
+					<span class="album_details"><? echo $translator->get("Jahr")  .': '?>
+						<a class="link" href="?site=search&q=<? echo $platte->Year . $translator->getLangUrl() ?>">
+							<? echo $platte->Year ?>
+						</a>
+					</span>
+					<span class="album_details"><? echo $translator->get("Label") .': '?>
+						<a class="link" href="?site=search&q=<? echo $platte->Label . $translator->getLangUrl() ?>">
+							<? echo $platte->Label ?>
+						</a>
+					</span>
+					<span class="album_details"><? echo $translator->get("Genre") .': '?>
+						<a class="link" href="?site=search&q=<? echo $platte->Genre . $translator->getLangUrl() ?>">
+							<? echo $platte->Genre ?>
+						</a>
+					</span>
+					<span class="album_details"><? echo $translator->get("Land") .': '?>
+						<a class="link" href="?site=search&q=<? echo $platte->Country . $translator->getLangUrl() ?>">
+							<? echo $translator->get($platte->Country) ?>
+						</a>
+					</span>
+					<p><? echo $translator->get("Preis") .': '. $platte->Price ?></p>
 				</div>
 			</div>
 		</li>

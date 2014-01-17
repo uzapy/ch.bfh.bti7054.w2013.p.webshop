@@ -28,10 +28,14 @@ nav {
 }
 
 .logo {
-	max-height: 30px;
+	max-height: 28px;
 	width: auto;
 	height: auto;
-	padding: 5px 15px;
+	padding: 6px 20px;
+}
+
+.logo-title {
+	max-height: 28px;
 }
 
 .nav-list > li {
@@ -99,7 +103,7 @@ header {
 /* Sortiment */
 .platte {
 	border-bottom: 1px solid #CCCCCC;
-	padding: 5px 0 2px;
+	padding: 5px 0 5px;
 	clear: both;
 }
 
@@ -116,16 +120,46 @@ header {
 	display: inline-block;
 }
 
+.album_info p {
+	height: 20px;
+}
+
+.buy {
+	font-size: large;
+}
+
 .album_details {
 	margin-right: 10px;
 }
 
 /* Details */
 .detail_cover {
-	max-width: 150px;
+	max-width: 170px;
 	width: auto;
 	height: auto;
 	margin-right: 10px;
+}
+
+.detail_left {
+	min-width: 150px;
+	display: inline-block;
+}
+
+.count_input {
+	width: 12px;
+	height: 10px;
+}
+
+.check_input {
+	margin-left: 2px;
+}
+
+.total_container {
+	margin: 7px 74px;
+}
+
+.login_container {
+	margin: 7px 0;
 }
 
 .link {

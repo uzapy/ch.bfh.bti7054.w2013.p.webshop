@@ -1,8 +1,9 @@
 <?php
 include 'php/database.php';
-include 'php/cartItem.php';
+include 'php/cart_item.php';
 
 session_start();
+
 $database = new Database();
 
 include 'php/db_connection.php';
@@ -13,6 +14,7 @@ include 'php/get_variables.php';
 include 'php/post_variables.php';
 include 'php/sites.php';
 include 'php/translator.php';
+include 'php/shopping_cart.php';
 
 $translator = new Translator($lang);
 
@@ -24,7 +26,8 @@ if (isset($_SESSION['kunde'])) {
 }
 
 if(!isset($_SESSION['kunde']) && $site == "checkout") {
-	header("Location: ?site=login&next=checkout");
+	$redirect = "Location: ?site=login&next=checkout" . $translator->getLangUrl();
+	header($redirect);
 }
 
 $title = $translator->get($sites[$site]);
@@ -73,7 +76,10 @@ include 'php/html_header.php';
 		?>
 		
 		<header>
-			<h1><? echo $translator->get($title) ?></h1>
+			<h1>
+				<img class="logo-title" alt="Logo" src="Resources/logo.png" />
+				<? echo $translator->get($title) ?>
+			</h1>
 		</header>
 
 		<div class="content">

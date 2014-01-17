@@ -4,16 +4,43 @@ if ($database->getPlatte($item)) {
 	
 	?>
 	<div class="platte">
-		<img class="detail_cover" alt="<? echo $album->Album ?>"
-			src="Resources/Covers/<? echo $album->CoverName ?>" />
+		<img class="detail_cover" alt="<? echo $album->Album ?>" src="Resources/Covers/<? echo $album->CoverName ?>" />
 		<div class="album_info">
 			<h4><? echo $album->Artist ." - ". $album->Album ?></h4>
-			<span class="album_details"><? echo $translator->get("Jahr")  .': '. $album->Year ?></span>
-			<span class="album_details"><? echo $translator->get("Label") .': '. $album->Label ?></span>
-			<span class="album_details"><? echo $translator->get("Genre") .': '. $album->Genre;?></span>
-			<span class="album_details"><? echo $translator->get("Land")  .': '. $translator->get($album->Country) ?></span>
-			<p><? echo $translator->get("Stil") .': '. $album->Style ?></p>
-			<br><a class="link" href="?site=cart&item=<? echo $album->ID . $translator->getLangUrl() ?>">
+			
+			<p>
+				<span class="detail_left"><? echo $translator->get("Jahr").':' ?></span>
+				<a class="link" href="?site=search&q=<? echo $album->Year . $translator->getLangUrl() ?>">
+					<span><? echo $album->Year ?></span>
+				</a>
+			</p>
+			<p>
+				<span class="detail_left"><? echo $translator->get("Label").':' ?></span>
+				<a class="link" href="?site=search&q=<? echo $album->Label . $translator->getLangUrl() ?>">
+					<span><? echo $album->Label ?></span>
+				</a>
+			</p>
+			<p>
+				<span class="detail_left"><? echo $translator->get("Genre").':' ?></span>
+				<a class="link" href="?site=search&q=<? echo $album->Genre . $translator->getLangUrl() ?>">
+					<span><? echo $album->Genre ?></span>
+				</a>
+			</p>
+			<p>
+				<span class="detail_left"><? echo $translator->get("Land").':' ?></span>
+				<a class="link" href="?site=search&q=<? echo $album->Country . $translator->getLangUrl() ?>">
+					<span><? echo $translator->get($album->Country) ?></span>
+				</a>
+			</p>
+			<p>
+				<span class="detail_left"><? echo $translator->get("Stil").':' ?></span>
+				<span><? echo $album->Style ?></span>
+			</p>
+			<p>
+				<span class="detail_left"><? echo $translator->get("Preis").':' ?></span>
+				<span><b><? echo $album->Price ?> CHF</b></span>
+			</p>
+			<a class="link buy" href="?site=cart&add=<? echo $album->ID . $translator->getLangUrl() ?>">
 				<? echo $translator->get("Kaufen") ?>
 			</a>
 		</div>

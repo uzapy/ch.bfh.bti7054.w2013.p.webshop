@@ -1,7 +1,7 @@
 <?php
 //Array mit Daten beladen
 //include('db_connection.php');
-include 'php/database.php';
+include 'database.php';
 $database = new Database();
 $allePlatten = $database->getAllPlatten();
 $keywords = array();
