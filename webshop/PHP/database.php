@@ -52,6 +52,21 @@ class Database {
 		return $this->mysqli->query($selectPlatten);
 	}
 	
+	public function searchPlattenAll($term) {
+		$selectPlatten = "SELECT * FROM `Platten` WHERE ";
+		$selectPlatten .= "`Artist` LIKE '%".$term."%' OR ";
+		$selectPlatten .= "`Album` LIKE '%".$term."%' OR ";
+		$selectPlatten .= "`Year` LIKE '%".$term."%' OR ";
+		$selectPlatten .= "`Country` LIKE '%".$term."%' OR ";
+		$selectPlatten .= "`Genre` LIKE '%".$term."%' OR ";
+		$selectPlatten .= "`Style` LIKE '%".$term."%' OR ";
+		$selectPlatten .= "`Label` LIKE '%".$term."%' OR ";
+		$selectPlatten .= "`Number` LIKE '%".$$term."%'";
+		$selectPlatten .= " ORDER BY Artist ASC;";
+		
+		return $this->mysqli->query($selectPlatten);
+	}
+	
 	public function saveKunde($firstName, $lastName, $eMail, $password, $phoneNumber, $lastFmUser, $addressID) {
 		$firstName = $this->mysqli->real_escape_string($firstName);
 		$lastName = $this->mysqli->real_escape_string($lastName);

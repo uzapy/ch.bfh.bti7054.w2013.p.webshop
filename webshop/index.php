@@ -90,12 +90,6 @@ include 'php/html_header.php';
 		?>
 
 		</div>
-
-		<footer>
-<!-- 			<p> -->
-<!-- 				<tt>Footer</tt> -->
-<!-- 			</p> -->
-		</footer>
 	</body>
 </html>
 

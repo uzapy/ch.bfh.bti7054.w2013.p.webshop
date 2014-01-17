@@ -81,6 +81,6 @@ if(isset($_POST['bestellung'])) {
 	mail_attachment($my_file, $my_path, $mail, $my_mail, $my_name, $my_replyto, $my_subject, $my_message);
 	unset($_SESSION["warenkorb"]);
 	
-	$meldung = $translator->get("Bestellung erfolgreich übermittelt");
+	$meldung = $translator->get("Bestellung erfolgreich übermittelt. Vielen Dank!");
 }
 ?>
