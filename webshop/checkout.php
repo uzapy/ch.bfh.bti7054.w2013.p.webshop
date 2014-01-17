@@ -1,82 +1,76 @@
-<?
+<?php
 if(isset($_SESSION['kunde'])) {
-	
-	if(!empty($_SESSION["warenkorb"])) {
-
-	 	echo '<ul>';
-		$tot_price = 0;
+	if (!empty($_SESSION["warenkorb"])) {
 		
-		foreach ($_SESSION["warenkorb"] as $key => $value) {
+		$shoppingCart = new ShoppingCart($_SESSION["warenkorb"], $database);
+		$albums = $shoppingCart->getAlbumsInCart();
 		
-			$a_id = $value->ID;
-		
-			if(isset($a_id)) {
-				
-				$a_count = $value->count;	
-				$a_digi = $value->withDigital;
-				$platte = $platte = $database->getPlatte($a_id);
-				$preis = ((int)$platte->Price)*(int)$a_count;
-				
-				if($value->withDigital == "on") {
-					$preis = $preis + 9.9;
-				}
-				
-				//total preis errechnen
-				$tot_price = $tot_price + $preis;
-				
-				?><li>
+		echo '<ul>';
+		foreach ($albums as $album) {
+			$cartItem = $shoppingCart->cart[$album->ID];
+			$isChecked = $cartItem->withDigital == 'on' ? $translator->get("Ja") : $translator->get("Nein");
+			$digitalDownloadPrice = $cartItem->withDigital == 'on' ? '(+9.90)' : "";
+			?>
+				<li>
 					<div class="platte">
-						<img class="album_cover" alt="<? echo $platte->Album ?>" src="Resources/Covers/<? echo $platte->CoverName ?>" />
+						<a href="?site=detail&item=<? echo $album->ID . $translator->getLangUrl() ?>">
+							<img class="album_cover" alt="<? echo $album->Album ?>"
+							src="Resources/Covers/<? echo $album->CoverName ?>" />
+						</a>
 						<div class="album_info">
-							<h4><? echo $platte->Artist ." - ". $platte->Album; ?></h4>
-							<span class="album_details">Anzahl: <? echo $a_count;?></span><br>
-							<span class="album_details">Inklusive Digitaler Download? <? echo  ($a_digi=='on') ? ' JA' : 'Nein';?></span>
-							<span class="album_details rechts"> <? echo $preis;?> CHF</span>
+							<h4><? echo $album->Artist ." - ". $album->Album ?></h4>
+							<p>
+								<span class="detail_left"><? echo $translator->get("Anzahl").':' ?></span>
+								<span><? echo $cartItem->count ?></span>
+							</p>
+							<p>
+								<span class="detail_left"><? echo $translator->get("Mit digitalem Download").':' ?></span>
+								<span><? echo $isChecked ?></span>
+							</p>
+							<p>
+								<span class="detail_left"><? echo $translator->get("Preis").':' ?></span>
+								<span><b><? echo $album->Price . ' ' . $digitalDownloadPrice . ' CHF' ?></b></span>
+							</p>
 						</div>
 					</div>
-				</li><?				
-			}
-		}
+				</li>
+			<?
+		}	
+		echo '</ul>';
+		?>
 	
-	?><li class="blank">
-			<div class="platte blank">
-				<span class="album_details rechts"></span>
-				<span class="album_details rechts">Total: <b><? echo number_format($tot_price, 0, '', '`') ?> CHF</b>
-				</span>
+		<div class="total_container">
+			<span class="detail_left total"><? echo $translator->get("Total").':' ?></span>
+			<span><b><? echo $shoppingCart->totalPrice ?> CHF</b></span>
+		</div>
+		
+		<form action="?site=start<? echo $translator->getLangUrl() ?>" method="POST" name="checkout">
+			<fieldset>
+				<p class="total_container">
+					<label class="detail_left" for="shipping"><? echo $translator->get("Versandoptionen") ?>:</label>
+					<select name="shipping" size="1">
+						<option value="<? echo $translator->get("Postpaket") ?>"><? echo $translator->get("Postpaket") ?></option>
+						<option value="<? echo $translator->get("DeFex Express") ?>"><? echo $translator->get("DeFex Express") ?></option>
+						<option value="<? echo $translator->get("Economy") ?>"><? echo $translator->get("Economy") ?></option>
+					</select>
+				</p>
+				<p class="total_container">
+					<label class="detail_left" for="payment"><? echo $translator->get("Bezahloptionen") ?>:</label>
+					<select name="payment" size="1">
+						<option value="<? echo $translator->get("Rechnung") ?>"><? echo $translator->get("Rechnung") ?></option>
+						<option value="<? echo $translator->get("Kreditkarte") ?>"><? echo $translator->get("Kreditkarte") ?></option>
+						<option value="<? echo $translator->get("PostFinance") ?>"><? echo $translator->get("PostFinance") ?></option>
+					</select>
+				</p>
+			</fieldset>
+			<div class="total_container">
+				<input class="detail_left" type="submit" name="bestellung" value=<? echo $translator->get("Bestellung absenden") ?> />
 			</div>
-		</li>
-	</ul>
-	
-	<br/><br/><br/><br/>
-	
-	<form accept-charset="utf-8" id="checkoutForm" autocomplete="on" action="?site=checkout" method="POST" name="registerForm">
-		<fieldset>
-			<p>
-				<label for="shipping"><? echo $translator->get("Versandoptionen") ?>:</label>
-				<select name="shipping" size="1">
-					<option value="<? echo $translator->get("Postpaket") ?>"><? echo $translator->get("Postpaket") ?></option>
-					<option value="<? echo $translator->get("DeFex Express") ?>"><? echo $translator->get("DeFex Express") ?></option>
-					<option value="<? echo $translator->get("Economy") ?>"><? echo $translator->get("Economy") ?></option>
-				</select>
-			</p>
-			<p>
-				<label for="payment"><? echo $translator->get("Bezahloptionen") ?>:</label>
-				<select name="payment" size="1">
-					<option value="<? echo $translator->get("Rechnung") ?>"><? echo $translator->get("Rechnung") ?></option>
-					<option value="<? echo $translator->get("Kreditkarte") ?>"><? echo $translator->get("Kreditkarte") ?></option>
-					<option value="<? echo $translator->get("PostFinance") ?>"><? echo $translator->get("PostFinance") ?></option>
-				</select>
-			</p>
-		</fieldset>
-		<br>
-		<input type="submit" name="bestellung_submit" value="Bestellung absenden" />
-	</form>
-
-	<?
+		</form><?
 	} else {
-		echo "Der Warenkorb ist leer";
+		echo $translator->get("Der Warenkorb ist leer");
 	}
 } else {
-	echo "Bitte loggen sie sich ein";
+	echo $translator->get("Bitte loggen sie sich ein");
 }
 ?>

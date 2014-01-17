@@ -7,7 +7,7 @@ $sites = array (
 		'register' => 'Registrieren',
 		'cart' => 'Warenkorb',
 		'detail' => 'Details',
-		'checkout' => 'Bestellung bestŠtigen'
+		'checkout' => 'Bestellung bestÃ¤tigen'
 );
 
 $menu_items = array (

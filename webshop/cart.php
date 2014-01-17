@@ -51,7 +51,7 @@ if (count($albums) > 0) {
 						</p>	
 						<p>
 							<span class="detail_left"><? echo $translator->get("Preis").':' ?></span>
-							<span><b><? echo $translator->get($album->Price) . ' ' . $digitalDownloadPrice . ' CHF' ?></b></span>
+							<span><b><? echo $album->Price . ' ' . $digitalDownloadPrice . ' CHF' ?></b></span>
 						</p>
 						<p>
 							<a class="link" href="?site=cart&remove=<? echo $album->ID . $translator->getLangUrl(); ?>">

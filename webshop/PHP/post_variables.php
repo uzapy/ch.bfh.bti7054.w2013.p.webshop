@@ -56,7 +56,7 @@ if (isset($_POST['new_email']) && isset($_POST['firstname']) && isset($_POST['la
 }
 
 //bestellung verarbeiten
-if(isset($_POST['bestellung_submit'])) {
+if(isset($_POST['bestellung'])) {
 	
 	$orderID = $database->saveOrder($_SESSION['kunde'], $_SESSION["warenkorb"], $_POST['shipping'], $_POST['payment']);
 	
@@ -81,6 +81,6 @@ if(isset($_POST['bestellung_submit'])) {
 	mail_attachment($my_file, $my_path, $mail, $my_mail, $my_name, $my_replyto, $my_subject, $my_message);
 	unset($_SESSION["warenkorb"]);
 	
-	$meldung = $translator->get("Bestellung erfolgreich Ÿbermittelt");
+	$meldung = $translator->get("Bestellung erfolgreich Ã¼bermittelt");
 }
 ?>
