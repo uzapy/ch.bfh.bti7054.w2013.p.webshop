@@ -13,15 +13,15 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 	$kunde = $database->getKunde($email);
 	if ($kunde) {
 		if (password_verify($password, $kunde->Password)) {
-			$meldung = "Login erfolgreich";
+			$meldung = $translator->get("Login erfolgreich");
 			$_SESSION['kunde'] = $kunde->EMail;
 		} else {
 			$site = 'login';
-			$meldung = "Passwort nicht korrekt";
+			$meldung = $translator->get("Passwort nicht korrekt, bitte versuchen Sie es erneut");
 		}
 	} else {
 		$site = 'login';
-		$meldung = "Email nicht gefunden";
+		$meldung = $translator->get("Email nicht gefunden");
 	}
 }
 
@@ -30,7 +30,7 @@ if ($site == 'logout') {
 	unset($_SESSION['kunde']);
 	unset($_SESSION['warenkorb']);
 	$site = 'start';
-	$meldung = "Logout erfolgreich";
+	$meldung = $translator->get("Logout erfolgreich");
 }
 
 //registrierung
@@ -47,8 +47,12 @@ if (isset($_POST['new_email']) && isset($_POST['firstname']) && isset($_POST['la
 	$newKunde = $database->saveKunde($_POST['firstname'], $_POST['lastname'], $_POST['new_email'],
 		$password, $phoneNumber, $lastFmUser, $newAddress->ID);
 	
-	$meldung = "Registrierung erfolgreich!";
-	$_SESSION['kunde'] = $newKunde->EMail;
+	if ($newKunde->ID > 0) {
+		$meldung = $translator->get("Registrierung erfolgreich!");
+		$_SESSION['kunde'] = $newKunde->EMail;
+	} else {
+		$meldung = $translator->get("Es ist etwas schief gelaufen bei der Registrierung");
+	}
 }
 
 //bestellung verarbeiten
@@ -77,6 +81,6 @@ if(isset($_POST['bestellung_submit'])) {
 	mail_attachment($my_file, $my_path, $mail, $my_mail, $my_name, $my_replyto, $my_subject, $my_message);
 	unset($_SESSION["warenkorb"]);
 	
-	$meldung = "Bestellung erfolgreich Ÿbermittelt";
+	$meldung = $translator->get("Bestellung erfolgreich Ÿbermittelt");
 }
 ?>

@@ -9,7 +9,7 @@
 			<input id="password" name="password" required="required" type="password" placeholder="password" />
 		</p>
 		<div class="login_container">
-			<a class="detail_left" href="?site=register<? echo $translator->getLangUrl() ?>"><? echo $translator->get("Registrieren") ?></a>
+			<a class="detail_left link" href="?site=register<? echo $translator->getLangUrl() ?>"><? echo $translator->get("Registrieren") ?></a>
 			<input type="submit" value="Login" />
 		</div>
 	</fieldset>

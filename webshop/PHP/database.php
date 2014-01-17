@@ -53,20 +53,20 @@ class Database {
 	}
 	
 	public function saveKunde($firstName, $lastName, $eMail, $password, $phoneNumber, $lastFmUser, $addressID) {
-		$firstName = "'" . $this->mysqli->real_escape_string($firstName) . "'";
-		$lastName = "'" . $this->mysqli->real_escape_string($lastName) . "'";
-		$eMail = "'" . $this->mysqli->real_escape_string($eMail) . "'";
-		$password = "'" . $this->mysqli->real_escape_string($password) . "'";
-		$phoneNumber = "'" . $this->mysqli->real_escape_string($phoneNumber) . "'";
-		$lastFmUser = "'" . $this->mysqli->real_escape_string($lastFmUser) . "'";
-		$addressID = "'" . $this->mysqli->real_escape_string($addressID) . "'";
+		$firstName = $this->mysqli->real_escape_string($firstName);
+		$lastName = $this->mysqli->real_escape_string($lastName);
+		$eMail = $this->mysqli->real_escape_string($eMail);
+		$password = $this->mysqli->real_escape_string($password);
+		$phoneNumber = $this->mysqli->real_escape_string($phoneNumber);
+		$lastFmUser = $this->mysqli->real_escape_string($lastFmUser);
+		$addressID = $this->mysqli->real_escape_string($addressID);
 		
 		$insertKunde = "INSERT INTO `Kunden` (`FirstName`, `LastName`, `EMail`, `Password`, `PhoneNumber`, `LastFmUser`, `AddressID`) ";
-		$insertKunde .= "VALUES ('" . $firstName . "', '" . $lastName . "', '" . $eMail . "', '" . $password . "', '" . $phoneNumber . "', '" . $lastFmUser . "', '" . $addressID . ");";
+		$insertKunde .= "VALUES ('" . $firstName . "', '" . $lastName . "', '" . $eMail . "', '" . $password . "', '" . $phoneNumber . "', '" . $lastFmUser . "', '" . $addressID . "');";
 		
 		if ($this->mysqli->query($insertKunde)) {
 			if ($this->mysqli->insert_id > 0) {
-				return $this->mysqli->insert_id;
+				return $this->getKundeById($this->mysqli->insert_id);
 			}
 		}
 	}
@@ -83,10 +83,10 @@ class Database {
 	}
 	
 	public function saveAddress($street, $number, $postalCode, $city) {
-		$street = "'" . $this->mysqli->real_escape_string($street) . "'";
-		$number = "'" . $this->mysqli->real_escape_string($number) . "'";
-		$postalCode = "'" . $this->mysqli->real_escape_string($postalCode) . "'";
-		$city = "'" . $this->mysqli->real_escape_string($city) . "'";
+		$street = $this->mysqli->real_escape_string($street);
+		$number = $this->mysqli->real_escape_string($number);
+		$postalCode = $this->mysqli->real_escape_string($postalCode);
+		$city = $this->mysqli->real_escape_string($city);
 		
 		$insertAddress = "INSERT INTO `Adressen` (`Street`, `Number`, `PostalCode`, `City`) ";
 		$insertAddress .= "VALUES ('" . $street . "', '" . $number . "', '" . $postalCode . "', '" . $city . "');";
