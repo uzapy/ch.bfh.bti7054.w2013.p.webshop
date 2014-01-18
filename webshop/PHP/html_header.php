@@ -13,7 +13,7 @@
 		<link rel="apple-touch-icon" href="Resources/disc.png" />
 		
 		<link rel="stylesheet" href="CSS/reset.css" type="text/css" media="all"/>
-		<link rel="stylesheet" href="CSS/screen/layout.css" type="text/css" media="screen" title="Screen"/>
+		<link rel="stylesheet" href="CSS/layout.css" type="text/css" media="screen" title="Screen"/>
 		
 		<title>Plattelade - <? echo $title ?></title>
 	</head>

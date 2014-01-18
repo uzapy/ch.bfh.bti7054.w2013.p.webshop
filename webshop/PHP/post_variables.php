@@ -4,11 +4,8 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	
-	$email = stripslashes($email);
-	$password = stripslashes($password);
-	
-	$email = $mysql->real_escape_string($email);
-	$password = $mysql->real_escape_string($password);
+	$email = $database->sanitizeString($email);
+	$password = $database->sanitizeString($password);
 	
 	$kunde = $database->getKunde($email);
 	if ($kunde) {
@@ -64,23 +61,18 @@ if(isset($_POST['bestellung'])) {
 	
 	// pdf ersetllen
 	$pdfCreator = new PdfCreator($platten, $_SESSION["warenkorb"], $orderID);
-	$pdfCreator->create();
+	$fileName = $pdfCreator->create();
 	
 	// email versenden
-	include("PHP/mail_header.php");
-	$mail = $_SESSION['kunde'];
-	$my_file = "bestellung_".$orderID.".pdf"; 
-	$my_path = "Resources/Bestellungen/";
+	include("php/mailer.php");
+	$mailer = new Mailer($_SESSION['kunde'], $orderID, $translator, $database);
+	$isMailSent = $mailer->sendMailWithAttachment($fileName);
 	
-	$my_name = "Marko";
-	$my_mail = "uzapy@hotmail.com";
-	$my_replyto = "uzapy@hotmail.com";
-	$my_subject = "Bestellung Nr. ".$orderID;
-	$my_message = "Hallo,\r\nVielen Dank fuer deine Bestellung!\r\n\r\nGruss, Marko";
-	
-	mail_attachment($my_file, $my_path, $mail, $my_mail, $my_name, $my_replyto, $my_subject, $my_message);
-	unset($_SESSION["warenkorb"]);
-	
-	$meldung = $translator->get("Bestellung erfolgreich übermittelt. Vielen Dank!");
+	if ($isMailSent) {
+		unset($_SESSION["warenkorb"]);
+		$meldung = $translator->get("Bestellung erfolgreich übermittelt. Vielen Dank!");
+	} else {
+		$meldung = $translator->get("Etwas ist schief gelaufen. Bitte versuchen Sie es später erneut.");
+	}
 }
 ?>

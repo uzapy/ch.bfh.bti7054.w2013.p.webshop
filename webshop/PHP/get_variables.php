@@ -34,5 +34,4 @@ if (isset ( $_GET['remove'] )) {
 } else {
 	unset($removeItem);
 }
-
 ?>

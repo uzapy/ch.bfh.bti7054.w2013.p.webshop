@@ -11,7 +11,6 @@ class PdfCreator {
 		$this->cart = $cart;
 		$this->orderID = $orderID;
 		$this->pdf = new FPDF();
-		$this->database = new Database();
 	}
 	
 	public function create() {
@@ -45,6 +44,8 @@ class PdfCreator {
 		$this->pdf->Cell(180,10,'Total: ' . $this->totalPrice . ' CHF', 0, 1, 'R');
 		
 		$this->pdf->Output('Resources/Bestellungen/bestellung_' . $this->orderID . '.pdf','F');
+		
+		return 'Resources/Bestellungen/bestellung_' . $this->orderID . '.pdf';
 	}
 }
 ?>

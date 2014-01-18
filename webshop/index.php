@@ -6,11 +6,11 @@ session_start();
 
 $database = new Database();
 
-include 'php/db_connection.php';
 include 'pdf/fpdf.php';
 include 'pdf/pdfCreator.php';
 include 'php/get_variables.php';
 include 'php/translator.php';
+
 $translator = new Translator($lang);
 
 include 'php/post_variables.php';
@@ -93,4 +93,4 @@ include 'php/html_header.php';
 	</body>
 </html>
 
-<? $mysql->close(); ?>
+<? $database->close(); ?>

@@ -8,6 +8,16 @@ class Database {
 		$this->mysqli->query("SET NAMES 'utf8'");
 	}
 	
+	public function close() {
+		$this->mysqli->close();
+	}
+	
+	public function sanitizeString($str) {
+		$str = stripslashes($str);
+		$str = $this->mysqli->real_escape_string($str);
+		return $str;
+	}
+	
 	public function getKunde($email) {
 		$email = $this->mysqli->real_escape_string ($email);
 		$selectKunde = "SELECT * FROM Kunden WHERE `EMail` = '$email';";

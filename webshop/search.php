@@ -13,6 +13,10 @@ if (isset($_POST['col_search'])) {
 } else {
 	$col_s = "";
 }
+
+$mysql = new mysqli("localhost", "root", "root");
+$mysql->select_db("plattelade");
+$mysql->query("SET NAMES 'utf8'");
 ?>
 
 <form action="?site=search<? echo $translator->getLangUrl(); ?>" method="POST" name="suche">
