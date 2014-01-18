@@ -30,7 +30,6 @@ if(!isset($_SESSION['kunde']) && $site == "checkout") {
 }
 
 $title = $translator->get($sites[$site]);
-
 include 'php/html_header.php';
 
 ?>

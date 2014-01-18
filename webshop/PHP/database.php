@@ -63,6 +63,8 @@ class Database {
 	}
 	
 	public function searchPlattenAll($term) {
+		$term = $this->sanitizeString($term);
+		
 		$selectPlatten = "SELECT * FROM `Platten` WHERE ";
 		$selectPlatten .= "`Artist` LIKE '%".$term."%' OR ";
 		$selectPlatten .= "`Album` LIKE '%".$term."%' OR ";
@@ -71,8 +73,33 @@ class Database {
 		$selectPlatten .= "`Genre` LIKE '%".$term."%' OR ";
 		$selectPlatten .= "`Style` LIKE '%".$term."%' OR ";
 		$selectPlatten .= "`Label` LIKE '%".$term."%' OR ";
-		$selectPlatten .= "`Number` LIKE '%".$$term."%'";
+		$selectPlatten .= "`Number` LIKE '%".$term."%'";
 		$selectPlatten .= " ORDER BY Artist ASC;";
+		
+		return $this->mysqli->query($selectPlatten);
+	}
+	
+	public function searchPlattenByCategory($category, $term) {
+		$term = $this->sanitizeString($term);
+		
+		$selectPlatten = "SELECT * FROM `Platten` WHERE ";
+		$selectPlatten .= "`".$category."` LIKE '%".$term."%'";
+		$selectPlatten .= " ORDER BY Artist ASC;";
+		
+		return $this->mysqli->query($selectPlatten);
+	}
+	
+	public function searchPlattenByArtistSet($set) {
+		$selectPlatten = "SELECT * FROM `Platten` WHERE ";
+		foreach ($set as $artist) {
+			$artist = $this->sanitizeString($artist);
+			
+			$selectPlatten .= "`Artist` LIKE '" . $artist . "' ";
+			
+			if ($artist !== end($set)) {
+				$selectPlatten .= "OR ";
+			}
+		}
 		
 		return $this->mysqli->query($selectPlatten);
 	}

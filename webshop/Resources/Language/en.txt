@@ -88,3 +88,4 @@ Bestellung Nr.=Order No.
 Hallo=Hello
 Vielen Dank fuer deine Bestellung!=Thank you for your order!
 Gruss=Greetings
+Nichts gefunden, Sorry.=Couldn't find anything, sorry.

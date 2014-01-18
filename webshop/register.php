@@ -1,6 +1,6 @@
 <script src="js/validation.js"></script>
-<form accept-charset="utf-8" id="registerForm" autocomplete="on" action="?site=start" method="POST" name="registerForm"
-	onsubmit="return validateForm();">
+<form accept-charset="utf-8" id="registerForm" autocomplete="on" action="?site=start<? echo $translator->getLangUrl(); ?>" 
+	method="POST" name="registerForm" onsubmit="return validateForm();">
 
 	<fieldset>
 		<p>
