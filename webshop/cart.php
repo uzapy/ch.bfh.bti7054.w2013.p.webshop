@@ -3,15 +3,19 @@ if (!isset($_SESSION["warenkorb"])) {
 	$_SESSION["warenkorb"] = array();
 }
 
+// Warenkorb aus der SESSION-Varieble lesen
 $shoppingCart = new ShoppingCart($_SESSION["warenkorb"], $database);
 
+// Neue Platte zu Warenkorb hinzhufügen
 if (isset($addItem)) {
 	$shoppingCart->add($addItem);
 }
+// Platte aus Warenkorb entfernen
 if (isset($removeItem)) {
 	$shoppingCart->remove($removeItem);
 }
 
+// Änderungen am Warenkorb speichern
 if(isset($_POST["save"])) {
 	$albumDigitals = null;
 	if (isset($_POST["album_digital"]) && count($_POST["album_digital"]) > 0) {
@@ -20,10 +24,10 @@ if(isset($_POST["save"])) {
 	$shoppingCart->refresh($_POST["album_id"], $_POST["album_count"], $albumDigitals);
 }
 
+// Alle Platten im Warenkorb aus der DB laden
 $albums = $shoppingCart->getAlbumsInCart();
 if (count($albums) > 0) {
 ?>
-	
 <form action="?site=cart<? echo $translator->getLangUrl() ?>" method="POST" name="shopping_cart">
 	<ul>
 		<?
@@ -82,6 +86,7 @@ if (count($albums) > 0) {
 	echo $translator->get("Der Warenkorb ist leer");
 }
 
+// Änderungen am Warenkorb in SESSION-Variable speichern
 if (isset($shoppingCart->cart)) {
 	$_SESSION["warenkorb"] = $shoppingCart->cart;
 }

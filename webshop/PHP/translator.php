@@ -9,6 +9,7 @@ class Translator {
 		$this->language = $language;
 	}
 	
+	// String abhŠngig von der Sprache aus dem Array lesen
     private function findString($str) {
         if (array_key_exists($str, $this->lang[$this->language])) {
 			return $this->lang[$this->language][$str];
@@ -20,6 +21,7 @@ class Translator {
         return explode('=',trim($str));
     }
 	
+    // String oder dessen †bersetzung auslesen
 	public function get($str) {	
         if (!array_key_exists($this->language, $this->lang)) {
             if (file_exists('Resources/Language/'.$this->language.'.txt')) {
@@ -39,12 +41,14 @@ class Translator {
         }
     }
     
+    // Aktuelle Sprache als GET-Parameter ausgeben
     public function getLangUrl() {
     	if(isset($_GET['lang'])) {
     		return '&lang=' . $this->language;
     	}
     }
     
+    // Aktuelle Sprache zurŸckgeben
     public function getActiveLang($str) {
     	if ($str == $this->language) {
     		return ' active';

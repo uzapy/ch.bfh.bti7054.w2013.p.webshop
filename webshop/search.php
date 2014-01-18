@@ -1,6 +1,6 @@
 <script src="JS/search.js"></script>
-
 <?php
+// Suchbegriff aus POST- oder GET-Variabeln auslesen
 if(isset($_POST['q'])) {
 	$q = $_POST['q'];
 } elseif(isset($_GET['q'])) {
@@ -8,6 +8,7 @@ if(isset($_POST['q'])) {
 	$category = "";
 }
 
+// Kategorie aus der POST-Variable auslesen
 if (isset($_POST['category_option'])) {
 	$category = $_POST['category_option'];
 } else {
@@ -16,7 +17,7 @@ if (isset($_POST['category_option'])) {
 ?>
 
 <form action="?site=search<? echo $translator->getLangUrl(); ?>" method="POST" name="suche">
-	<div id="main">
+	<div class="seartch_form">
 		<select name="category_option" id="category_option">
 			<option value="all"><? echo $translator->get("Alles") ?></option>
 			<option value="Artist" <? echo $category == "Artist" ? "selected" : "";?>><? echo $translator->get("Künstler") ?></option>
@@ -32,24 +33,26 @@ if (isset($_POST['category_option'])) {
 		<input name="q" type="text" maxlength="255" size="20" value="<? echo isset($q) ? $q : ""; ?>"
 			onkeyup="suggest(this.value)" autocomplete="off" />
 		<input type="submit" name="submit" value="Suchen" />
+		<div id="ausgabe"></div> 
 	</div>
 </form>
 
 <?php
 if(isset($_POST['q']) || isset($_GET['q'])) {
 	$result = array();
-		
+	
 	if($category == "all" || $category == "") {
-		
+		// Allgemeine Suche
 		$result = $database->searchPlattenAll($q);
 		
 	} elseif ($category == "LastFM") {
+		// Suche über Last.fm Benutzernamen
 		$lastFmUser = $q;
 	
-		// Include the API
+		// API einbinden
 		require 'lastFMAPI/lastfmapi/lastfmapi.php';
 	
-		// Put the auth data into an array
+		// Authentifizierungs-Daten in einen Array speichern
 		$authVars = array(
 				'apiKey' => 'ae77ad67ac320dd2231efe3bef1e7235',
 				'secret' => '80baefd85aea297c09836d4c56dd494e',
@@ -58,15 +61,16 @@ if(isset($_POST['q']) || isset($_GET['q'])) {
 
 		$config = array( 'enabled' => true, 'path' => 'lastFMAPI/lastfmapi/', 'cache_length' => 1800 );
 	
-		// Pass the array to the auth class to eturn a valid auth
+		// Klasse mit Authentifizierungs-Daten initialisieren
 		$auth = new lastfmApiAuth('setsession', $authVars);
 		$apiClass = new lastfmApi();
 		$userClass = $apiClass->getPackage($auth, 'user', $config);
 	
-		// Setup the variables
+		// Variabeln erstellen
 		$methodVars = array('user' => $lastFmUser);
 	
 		$artists = array();
+		// Anfrage abschicken und Ergebnis verarbeiten
 		if ($topArtists = $userClass->getTopArtists ($methodVars)) {
 			foreach ($topArtists as $artist) {
 				array_push($artists, $artist['name']);
@@ -77,7 +81,9 @@ if(isset($_POST['q']) || isset($_GET['q'])) {
 		} else {
 			die ( '<b>Error ' . $userClass->error ['code'] . ' - </b><i>' . $userClass->error ['desc'] . '</i>' );
 		}
+		
 	} else {
+		// Suche mit Kategorie (z.B. Land)
 		$result = $database->searchPlattenByCategory($category, $q);
 	}
 			

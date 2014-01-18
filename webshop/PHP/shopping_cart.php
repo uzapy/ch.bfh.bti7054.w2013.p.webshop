@@ -10,38 +10,47 @@ class ShoppingCart {
 		$this->database = $database;
 	}
 	
+	// Neues Album zum Warenkorb hinzufŸgen, oder Anzahl von einem bestehenden erhšhen
 	public function add($id) {
 		$newAlbum = new CartItem($id, 1, null);
 		
 		if(empty($this->cart) || !isset($this->cart[$newAlbum->ID])) {
-			// neues album in den warenkorb
+			// Neues Album in den Warenkorb
 			$this->cart[$newAlbum->ID] = $newAlbum;
 		} else  {
-			//bisheriges album um 1 erhšhen
+			// Bisheriges Album um 1 erhšhen
 			$this->cart[$newAlbum->ID]->increaseCount();
 		}
 	}
 	
+	// Album aus dem Warenkorb entfernen
 	public function remove($id) {
 		unset($this->cart[$id]);
 	}
 	
+	// Durch alle Alben gehen und Werte aktualisieren (Anzahl / mit oder ohne digitalen Download)
 	public function refresh($albumIDs, $albumCounts, $albumDigitals) {
 		for($i=0; $i<=count($albumIDs)-1; $i++) {
 			$albumDigitalChecked = isset( $albumDigitals ) ? $albumDigitals : null;
 		
 			$currentAlbum = new CartItem($albumIDs[$i], $albumCounts[$i], $albumDigitalChecked );
 		
-			$this->cart[$currentAlbum->ID]->count = $currentAlbum->count;
-		
-			if ($currentAlbum->withDigital != null) {
-				$this->cart[$currentAlbum->ID]->withDigital = $currentAlbum->withDigital;
+			if ($currentAlbum->count == 0) {
+				$this->remove($currentAlbum->ID);
 			} else {
-				$this->cart[$currentAlbum->ID]->withDigital = null;
+				$this->cart[$currentAlbum->ID]->count = $currentAlbum->count;
+			
+				if ($currentAlbum->withDigital != null) {
+					$this->cart[$currentAlbum->ID]->withDigital = $currentAlbum->withDigital;
+				} else {
+					$this->cart[$currentAlbum->ID]->withDigital = null;
+				}
 			}
+			
 		}
 	}
 	
+	// Alle Alben im Warenkorb aus der DB laden und Preis berechnen
 	public function getAlbumsInCart() {
 		foreach ($this->cart as $item) {
 			$album = $this->database->getPlatte($item->ID);

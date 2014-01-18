@@ -1,8 +1,10 @@
 <?php
 if(isset($_SESSION['kunde'])) {
 	if (!empty($_SESSION["warenkorb"])) {
-		
+
+		// Warenkorb aus der SESSION-Varieble lesen
 		$shoppingCart = new ShoppingCart($_SESSION["warenkorb"], $database);
+		// Alle Platten im Warenkorb aus der DB laden
 		$albums = $shoppingCart->getAlbumsInCart();
 		
 		echo '<ul>';
@@ -37,6 +39,7 @@ if(isset($_SESSION['kunde'])) {
 			<?
 		}	
 		echo '</ul>';
+		// Bestellungs-Optionen Formular
 		?>
 	
 		<div class="total_container">
@@ -44,7 +47,9 @@ if(isset($_SESSION['kunde'])) {
 			<span><b><? echo $shoppingCart->totalPrice ?> CHF</b></span>
 		</div>
 		
-		<form action="?site=start<? echo $translator->getLangUrl() ?>" method="POST" name="checkout">
+		<script src="JS/validation.js"></script>
+		<form action="?site=start<? echo $translator->getLangUrl() ?>" method="POST" name="checkout"
+			onsubmit="return confirmPurchase();">
 			<fieldset>
 				<p class="total_container">
 					<label class="detail_left" for="shipping"><? echo $translator->get("Versandoptionen") ?>:</label>

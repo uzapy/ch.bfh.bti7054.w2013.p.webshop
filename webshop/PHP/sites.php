@@ -1,4 +1,5 @@
 <?php
+// Alle Seiten der Webseite
 $sites = array (
 		'start' => 'Plattelade',
 		'store' => 'Sortiment',
@@ -10,6 +11,7 @@ $sites = array (
 		'checkout' => 'Bestellung bestätigen'
 );
 
+// Alle Seiten in der Menu-Leiste
 $menu_items = array (
 		'start' => 'Plattelade',
 		'store' => 'Sortiment',

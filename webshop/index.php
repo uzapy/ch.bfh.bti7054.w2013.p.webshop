@@ -7,7 +7,7 @@ session_start();
 $database = new Database();
 
 include 'pdf/fpdf.php';
-include 'pdf/pdfCreator.php';
+include 'php/pdfCreator.php';
 include 'php/get_variables.php';
 include 'php/translator.php';
 
@@ -24,14 +24,16 @@ if (isset($_SESSION['kunde'])) {
 	$menu_items['logout'] = 'Logout';
 }
 
+// Falls der Kunde nicht eingeloggt ist und zum Checkout-Formular gehen mšchte,
+// wird er zuerst zum Login-Formular umgeleitet
 if(!isset($_SESSION['kunde']) && $site == "checkout") {
 	$redirect = "Location: ?site=login&next=checkout" . $translator->getLangUrl();
 	header($redirect);
 }
 
 $title = $translator->get($sites[$site]);
-include 'php/html_header.php';
 
+include 'php/html_header.php';
 ?>
 	<body>
 		<nav>
@@ -41,17 +43,18 @@ include 'php/html_header.php';
 						<img class="logo" alt="Logo" src="Resources/logo.png" />
 					</a></li>
 				<?
-					foreach($menu_items as $key => $name)
-					{
-						// Seiten-Key / Sprache falls definiert / Aktiven Link hervorheben / †bersetzte Link-Bezeichung
-						$active = $key == $site ? 'active' : '';
-						echo '<li><a class="menu ' . $active . '" href="?site=' . $key . $translator->getLangUrl() . '">' . $translator->get($name) . '</a></li>';
-					}
-					
-					if (isset($_SESSION['kunde'])) {
-						echo '<li><span class="user-hint">('.
-							$translator->get("eingeloggt als") . ' ' . $_SESSION['kunde'] .')</span></li>';
-					}
+				// Hauptmenu und User-Hint erstellen
+				foreach($menu_items as $key => $name)
+				{
+					// Seiten-Key / Sprache falls definiert / Aktiven Link hervorheben / †bersetzte Link-Bezeichung
+					$active = $key == $site ? 'active' : '';
+					echo '<li><a class="menu ' . $active . '" href="?site=' . $key . $translator->getLangUrl() . '">' . $translator->get($name) . '</a></li>';
+				}
+				
+				if (isset($_SESSION['kunde'])) {
+					echo '<li><span class="user-hint">('.
+						$translator->get("eingeloggt als") . ' ' . $_SESSION['kunde'] .')</span></li>';
+				}
 				?>
 				</ul>
 				
@@ -81,13 +84,12 @@ include 'php/html_header.php';
 		</header>
 
 		<div class="content">
-		<?	
-		// Content-Seite laden
-		if (file_exists($site.".php")) {
-			include $site.".php";
-		}
-		?>
-
+			<?	
+			// Content-Seite laden
+			if (file_exists($site.".php")) {
+				include $site.".php";
+			}
+			?>
 		</div>
 	</body>
 </html>

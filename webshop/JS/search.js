@@ -2,7 +2,7 @@ var xmlHttp;
 
 function suggest(suchbegriff) {
 
-	var cS = document.getElementById("col_search");
+	var cS = document.getElementById("category_option");
 	var a = document.getElementById("ausgabe");
 	var colSearch = cS.options[cS.selectedIndex].value;
 
@@ -21,8 +21,10 @@ function suggest(suchbegriff) {
 		} else {
 			// URL vorbereiten, Zufallszahl umgeht den Browsercache
 			var aufruf = "PHP/suggest.php" + "?q=" + suchbegriff + "&sid=" + Math.random();
+			// Event-Handler abonnieren
 			xmlHttp.onreadystatechange = stateChanged;
 			xmlHttp.open("GET", aufruf, true);
+			// Aufruf abschicken
 			xmlHttp.send(null);
 		}
 	} else {
@@ -31,6 +33,7 @@ function suggest(suchbegriff) {
 } 
 
 function stateChanged() {
+	// Event-Handler: Antwort ins HTML-Element einsetzen
 	if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
 		document.getElementById("ausgabe").innerHTML = xmlHttp.responseText;
 	}

@@ -1,4 +1,6 @@
-<form action="?site=<? echo $next . $translator->getLangUrl() ?>" method="POST" name="login">
+<script src="JS/validation.js"></script>
+<form action="?site=<? echo $next . $translator->getLangUrl() ?>" method="POST" name="login"
+	 onsubmit="return validateLogin();">
 	<fieldset>
 		<p>
 			<label class="detail_left" for="email"><? echo $translator->get("E-Mail Adresse") ?>:</label>

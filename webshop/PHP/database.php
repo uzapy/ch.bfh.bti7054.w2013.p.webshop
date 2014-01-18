@@ -18,9 +18,10 @@ class Database {
 		return $str;
 	}
 	
+	// Einen Kunden laden per Email
 	public function getKunde($email) {
-		$email = $this->mysqli->real_escape_string ($email);
-		$selectKunde = "SELECT * FROM Kunden WHERE `EMail` = '$email';";
+		$email = $this->sanitizeString($email);
+		$selectKunde = "SELECT * FROM `Kunden` WHERE `EMail` = '$email';";
 		
 		if ($result = $this->mysqli->query($selectKunde)) {
 			if ($result->num_rows == 1) {
@@ -29,9 +30,10 @@ class Database {
 		}
 	}
 	
+	// Einen Kunden laden per ID
 	private function getKundeById($id) {
-		$id = $this->mysqli->real_escape_string ($id);
-		$selectKunde = "SELECT * FROM Kunden WHERE `ID` = '$id';";
+		$id = $this->sanitizeString($id);
+		$selectKunde = "SELECT * FROM `Kunden` WHERE `ID` = '$id';";
 		
 		if ($result = $this->mysqli->query($selectKunde)) {
 			if ($result->num_rows == 1) {
@@ -40,6 +42,7 @@ class Database {
 		}
 	}
 	
+	// Eine Platte laden per ID
 	public function getPlatte($id) {
 		$selectPlatte = "SELECT * FROM `Platten` WHERE `ID` = $id";
 		if ($result = $this->mysqli->query($selectPlatte)) {
@@ -49,6 +52,7 @@ class Database {
 		}
 	}
 	
+	// Platten laden, die im Warenkorb liegen
 	public function getPlatten($cart) {
 		$platten = array();
 		foreach ($cart as $key => $value) {
@@ -57,11 +61,13 @@ class Database {
 		return $platten;
 	}
 	
+	// Alle Platten laden
 	public function getAllPlatten() {
 		$selectPlatten = "SELECT * FROM `Platten`";
 		return $this->mysqli->query($selectPlatten);
 	}
 	
+	// Platten suchen nach Suchkriterium (Ÿber alle Eigenschaften)
 	public function searchPlattenAll($term) {
 		$term = $this->sanitizeString($term);
 		
@@ -72,13 +78,13 @@ class Database {
 		$selectPlatten .= "`Country` LIKE '%".$term."%' OR ";
 		$selectPlatten .= "`Genre` LIKE '%".$term."%' OR ";
 		$selectPlatten .= "`Style` LIKE '%".$term."%' OR ";
-		$selectPlatten .= "`Label` LIKE '%".$term."%' OR ";
-		$selectPlatten .= "`Number` LIKE '%".$term."%'";
+		$selectPlatten .= "`Label` LIKE '%".$term."%'";
 		$selectPlatten .= " ORDER BY Artist ASC;";
 		
 		return $this->mysqli->query($selectPlatten);
 	}
 	
+	// Platten suchen nach Suchkriterium (beschrŠnkt auf eine Eigenschaft z.B. 'Land')
 	public function searchPlattenByCategory($category, $term) {
 		$term = $this->sanitizeString($term);
 		
@@ -89,6 +95,7 @@ class Database {
 		return $this->mysqli->query($selectPlatten);
 	}
 	
+	// Platten suchen nach Liste von KŸnstlern
 	public function searchPlattenByArtistSet($set) {
 		$selectPlatten = "SELECT * FROM `Platten` WHERE ";
 		foreach ($set as $artist) {
@@ -104,14 +111,15 @@ class Database {
 		return $this->mysqli->query($selectPlatten);
 	}
 	
+	// Neuen Kunden abspeichern
 	public function saveKunde($firstName, $lastName, $eMail, $password, $phoneNumber, $lastFmUser, $addressID) {
-		$firstName = $this->mysqli->real_escape_string($firstName);
-		$lastName = $this->mysqli->real_escape_string($lastName);
-		$eMail = $this->mysqli->real_escape_string($eMail);
-		$password = $this->mysqli->real_escape_string($password);
-		$phoneNumber = $this->mysqli->real_escape_string($phoneNumber);
-		$lastFmUser = $this->mysqli->real_escape_string($lastFmUser);
-		$addressID = $this->mysqli->real_escape_string($addressID);
+		$firstName = $this->sanitizeString($firstName);
+		$lastName = $this->sanitizeString($lastName);
+		$eMail = $this->sanitizeString($eMail);
+		$password = $this->sanitizeString($password);
+		$phoneNumber = $this->sanitizeString($phoneNumber);
+		$lastFmUser = $this->sanitizeString($lastFmUser);
+		$addressID = $this->sanitizeString($addressID);
 		
 		$insertKunde = "INSERT INTO `Kunden` (`FirstName`, `LastName`, `EMail`, `Password`, `PhoneNumber`, `LastFmUser`, `AddressID`) ";
 		$insertKunde .= "VALUES ('" . $firstName . "', '" . $lastName . "', '" . $eMail . "', '" . $password . "', '" . $phoneNumber . "', '" . $lastFmUser . "', '" . $addressID . "');";
@@ -123,6 +131,7 @@ class Database {
 		}
 	}
 	
+	// Adresse laden per ID
 	public function getAddress($id) {
 		$id = $this->mysqli->real_escape_string ($id);
 		$selectAddress = "SELECT * FROM Adressen WHERE ID = '$id';";
@@ -134,11 +143,12 @@ class Database {
 		}
 	}
 	
+	// Neue Adresse abspeichern
 	public function saveAddress($street, $number, $postalCode, $city) {
-		$street = $this->mysqli->real_escape_string($street);
-		$number = $this->mysqli->real_escape_string($number);
-		$postalCode = $this->mysqli->real_escape_string($postalCode);
-		$city = $this->mysqli->real_escape_string($city);
+		$street = $this->sanitizeString($street);
+		$number = $this->sanitizeString($number);
+		$postalCode = $this->sanitizeString($postalCode);
+		$city = $this->sanitizeString($city);
 		
 		$insertAddress = "INSERT INTO `Adressen` (`Street`, `Number`, `PostalCode`, `City`) ";
 		$insertAddress .= "VALUES ('" . $street . "', '" . $number . "', '" . $postalCode . "', '" . $city . "');";
@@ -150,6 +160,7 @@ class Database {
 		}
 	}
 	
+	// Neue Bestellung abspeichern
 	public function saveOrder($email, $cart, $shippingMethod, $paymentMethod) {
 		$kunde = $this->getKunde($email);
 		$insertBestellung = "INSERT INTO `Bestellungen` (`KundenID`, `PaymentMethod`, `ShippingMethod`, `BillingAddressID`, `IsShipped`) ";
@@ -168,6 +179,7 @@ class Database {
 		}
 	}
 	
+	// Platten einer Bestellung zuordnen
 	public function saveItem($item, $orderID) {
 		$insertItem = "INSERT INTO `Platten_Bestellungen` (`PlattenID`, `BestellungID`, `WithDigitalDownload`, `Anzahl`) ";
 		$insertItem .= "VALUES (" . $item->ID . ", " . $orderID . ", '" . $item->withDigital . "', " . $item->count . " )";
