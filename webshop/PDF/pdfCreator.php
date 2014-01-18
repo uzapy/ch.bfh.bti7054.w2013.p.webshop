@@ -4,12 +4,14 @@ class PdfCreator {
 	private $cart;
 	private $orderID;
 	private $totalPrice = 0;
+	private $translator;
 	private $pdf;
 	
-	public function __construct($platten, $cart, $orderID) {
+	public function __construct($platten, $cart, $orderID, $translator) {
 		$this->platten = $platten;
 		$this->cart = $cart;
 		$this->orderID = $orderID;
+		$this->translator = $translator;
 		$this->pdf = new FPDF();
 	}
 	
@@ -18,7 +20,8 @@ class PdfCreator {
 		
 		$this->pdf->SetFont('Arial','B',16);
 		
-		$this->pdf->Cell(80,10,'Plattelade - Bestellungen', 0, 1);
+		$title = "Plattelade - " . $this->translator->get("Bestellung Nr.") . " " . $this->orderID;
+		$this->pdf->Cell(80,10,$title, 0, 1);
 		
 		$this->pdf->SetFont('Arial','',12);
 		

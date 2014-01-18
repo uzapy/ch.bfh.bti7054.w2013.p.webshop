@@ -60,7 +60,7 @@ if(isset($_POST['bestellung'])) {
 	$platten = $database->getPlatten($_SESSION["warenkorb"]);
 	
 	// pdf ersetllen
-	$pdfCreator = new PdfCreator($platten, $_SESSION["warenkorb"], $orderID);
+	$pdfCreator = new PdfCreator($platten, $_SESSION["warenkorb"], $orderID, $translator);
 	$fileName = $pdfCreator->create();
 	
 	// email versenden
