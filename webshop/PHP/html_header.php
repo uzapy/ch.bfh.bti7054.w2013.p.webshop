@@ -12,10 +12,8 @@
 		<link rel="shortcut icon" href="Resources/disc.ico" />
 		<link rel="apple-touch-icon" href="Resources/disc.png" />
 		
-		<link rel="stylesheet" href="CSS/reset/reset.css" type="text/css" media="all"/>
-		<link rel="stylesheet" href="CSS/screen/format.css" type="text/css" media="screen" title="Screen"/>
+		<link rel="stylesheet" href="CSS/reset.css" type="text/css" media="all"/>
 		<link rel="stylesheet" href="CSS/screen/layout.css" type="text/css" media="screen" title="Screen"/>
-		<link rel="alternate stylesheet" href="CSS/handheld/mobile.css" type="text/css" media="handheld" title="Handheld"/>
 		
 		<title>Plattelade - <? echo $title ?></title>
 	</head>
