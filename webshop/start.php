@@ -1,5 +1,5 @@
 <h4><? echo $translator->get("Willkommen in unserem kleinen Plattelade.") ?></h4>
-<div class="text"><? echo $translator->get("Der Plattelade ist ein aber feiner Vinyl-Shop im Herzen von Bern. In der idyllischen Altstadt, gleich neben dem bekannten Kultur- und Konzertlokal 'Schlachthaus' angesiedelt, steht seit Oktober 2010 eine grosse Auswahl an Vinyl LP's, 7'' Singles, CD's, T-Shirts und Buttons für anspruchsvolle Musikfans bereit.") ?></div>
+<div class="text"><? echo $translator->get("Der Plattelade ist ein aber feiner Vinyl-Shop im Herzen von Bern. In der idyllischen Altstadt, gleich neben dem bekannten Kultur- und Konzertlokal 'Schlachthaus' angesiedelt, steht seit Oktober 2010 eine grosse Auswahl an Vinyl LP's, 7-Inch Singles, CD's, T-Shirts und Buttons für anspruchsvolle Musikfans bereit.") ?></div>
 <div class="text"><? echo $translator->get("Zahlreiche Occasionen, sowie aktuelle Neuheiten lassen sich hier in entspannter Atmosphäre durchstöbern und probehören, alles zu äusserst fairen Preisen – fachkundige Beratung inklusive.") ?></div>
 <div class="text"><? echo $translator->get("Ob Indie-Rock, Raritäten aus den Sixties, New Wave, Metal, Jazz oder Hip Hop - im Plattelade findet sich bestimmt etwas für echte Musikliebhaber. Auch die lokale Musikszene kommt nicht zu kurz und hat hier eine wichtige Verkaufsplattform.") ?></div>
 

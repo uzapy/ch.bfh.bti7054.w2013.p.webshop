@@ -2,13 +2,13 @@ function validateRegister() {
 	// Email validieren
 	validateEmail("registerForm", "new_email");
 	
-	// Passwörter auslesen
+	// Passw√∂rter auslesen
 	var password1 = document.forms["registerForm"]["new_password"].value;
 	var password2 = document.forms["registerForm"]["new_password_confirm"].value;
 	
-	// Passwörter vergleichen
+	// Passw√∂rter vergleichen
 	if (password1 != password2) {
-		window.alert("Das wiederholte Passwort stimmt nicht mit dem erten überein");
+		window.alert("Das wiederholte Passwort stimmt nicht mit dem erten √ºberein");
 		return false;
 	}
 }
@@ -34,6 +34,6 @@ function validateEmail(form, element) {
 }
 
 function confirmPurchase() {
-	// Kauf bestätigen oder Kauf abbrechen
+	// Kauf best√§tigen oder Kauf abbrechen
 	return window.confirm("Wollen sie diese Platten wirklich kaufen?");
 }
