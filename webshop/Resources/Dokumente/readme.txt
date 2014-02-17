@@ -30,9 +30,6 @@ Task 08: (keine Cookies) / Shopping Cart / User Accounts
 Task 09: OO Shopping Cart / OO Product List (Objekt direkt aus DB) / Even more OO
 Task 10: Database Schema Design / Database Setup / PHP Integration / (keine Administrator area)
 Task 11: Web Service Integration (Last.fm API)
-Task 12: (keine Daten aus XML) / AJAX (SuchvorschlŠge) / (keine HTML-Temlplates)
+Task 12: (keine Daten aus XML) / AJAX (Suchvorschlï¿½ge) / (keine HTML-Temlplates)
 Task 13: PDF mit FPDF
 Task 14: (keine Regex)
-
-CreenCast
-https://dl.dropboxusercontent.com/u/11270673/ScreenCast%20bublm1.mov
